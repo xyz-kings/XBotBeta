@@ -17,6 +17,8 @@ Pastikan perangkat sudah terpasang:
 Install kebutuhan di Termux:
 ```bash
 pkg update && pkg upgrade
+```
+```bash
 pkg install git nodejs yarn 
 ```
 
