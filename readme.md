@@ -80,6 +80,10 @@ cd XBotBeta
 
 Setelah masuk folder project:
 - jangan langsung buka tapi masuk ke config.json caranya 
+```bash
+nano config.json
+```
+
 - dan setelah itu Ctrl + X + y 
 
 lalu lanjut ke install dependensi
