@@ -66,9 +66,9 @@ pkg install git nodejs yarn
 
 ---
 
-Instalasi
+## Instalasi
 
-Clone repository:
+### Clone repository:
 ```bash
 git clone https://github.com/xyz-kings/XBotBeta.git
 ```
