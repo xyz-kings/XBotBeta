@@ -41,7 +41,9 @@ Singkatnya: bot serba guna, bukan sok pinter tapi kepake 🔧
 ---
 
 ### 💬 Kalau nemu bug, error, atau ide fitur:
+
  • Jangan nyinyir
+ 
  • Jangan ngamuk
  
 ~ Langsung lapor lewat repo ~
