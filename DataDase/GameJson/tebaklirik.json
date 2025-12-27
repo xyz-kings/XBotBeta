@@ -1,0 +1,722 @@
+[
+    {
+        "question": "Ada pelangi, di bola matamu, dan _____ diri tuk bilang aku sayang padamu.",
+        "answer": "Memaksa"
+    },
+    {
+        "question": "Bawalah aku ke dalam, ke dalam hangat dirimu, bawalah aku _____ menari dalam pelukanmu.",
+        "answer": "Kesana"
+    },
+    {
+        "question": "Kau yang kuinginkan, meski tak ku____, kau yang kubayangkan, yang slalu kuimpikan.",
+        "answer": "Ungkapkan"
+    },
+    {
+        "question": "Kau tau sejak pertama bertemu, terbayang _____ indah di matamu, kau berikan tatapan cinta untukku.",
+        "answer": "Senyum"
+    },
+    {
+        "question": "Berada di pelukanmu mengajarkanku apa artinya______ kesempurnaan cinta.",
+        "answer": "Kenyamanan"
+    },
+    {
+        "question": "Apa yang salah dengan lagu ini, kenapa _____ ku mengingatmu, seperti aku bisa merasakan getaran jantung dan langkah kakimu.",
+        "answer": "Kembali"
+    },
+    {
+        "question": "Ada pelangi, di bola matamu, dan _____ diri tuk bilang aku sayang padamu.",
+        "answer": "Memaksa"
+    },
+    {
+        "question": "Dengar laraku, suara hati ini _____ namamu, karna separuh aku, dirimu",
+        "answer": "Memanggil"
+    },
+    {
+        "question": "Mungkin suatu saat nanti, kau _____ bahagia meski tak bersamaku.",
+        "answer": "Temukan"
+    },
+    {
+        "question": "Terlalu manis untuk dilupakan, kenangan yang indah _____ tinggalah mimpi.",
+        "answer": "Bersamamu"
+    },
+    {
+        "question": "Mungkin suatu saat nanti, kau _____ bahagia meski tak bersamaku.",
+        "answer": "Temukan"
+    },
+    {
+        "question": "Garuda di dadaku, garuda kebanggaanku, ku yakin hari ini pasti menang, kobarkan ______, tunjukkan keinginanmu, ku yakin hari ini pasti menang.",
+        "answer": "Semangatmu"
+    },
+    {
+        "question": "Bila tak selamanya kita bisa bersama, haruskah _____ di sini, dan bila selamanya kita bisa bersama, kusimpan cinta ini.",
+        "answer": "Menunggumu"
+    },
+    {
+        "question": "Dia dia dia cinta yang kutunggu tunggu tunggu, dia dia dia _____ hidupku.",
+        "answer": "Lengkapi"
+    },
+    {
+        "question": "Cinta itu ruang dan waktu, tak sekejap harus mau. Cinta butuh ruang yang sepi, tuk______ hati.",
+        "answer": "Mengutarakan"
+    },
+    {
+        "question": "Untuk apa? Untuk apa cinta tanpa_____, untuk apa cinta tanpa perbuatan.",
+        "answer": "Kejujuran"
+    },
+    {
+        "question": "Ku suka dirinya, mungkin aku sayang, namun _____ mungkin, kau menjadi milikku.",
+        "answer": "Apakah"
+    },
+    {
+        "question": "Untuk apa? Untuk apa cinta tanpa_____, untuk apa cinta tanpa perbuatan. Tak ada artinya.",
+        "answer": "Kejujuran"
+    },
+    {
+        "question": "Tak terkira, di sampingmu, adalah hal _____ yang pernah kuinginkan.",
+        "answer": "Terindah"
+    },
+    {
+        "question": "Ku suka dirinya, mungkin aku sayang, namun _____ mungkin, kau menjadi milikku.",
+        "answer": "Apakah"
+    },
+    {
+        "question": "Mengapa kau pergi, mengapa kau pergi, di saat aku mulai mencintaimu, berharap engkau jadi ____ hatiku, malah kau pergi jauh dari hidupku.",
+        "answer": "Kekasih"
+    },
+    {
+        "question": "Terlalu manis untuk dilupakan, kenangan yang indah _____ tinggalah mimpi.",
+        "answer": "Bersamamu"
+    },
+    {
+        "question": "Aku tak bisa _____, bila kau tak ada di sini, aku tak habis pikirkan, bila kau tak lagi temani aku.",
+        "answer": "Bayangkan"
+    },
+    {
+        "question": "Kau harus bisa berlapang dada. Kau harus bisa ambil______.",
+        "answer": "Hikmahnya"
+    },
+    {
+        "question": "Mana mungkin selimut tetangga, hangati _____ dalam kedinginan, malam-malam panjang, setiap tidurku selalu kesepian.",
+        "answer": "Tubuhku"
+    },
+    {
+        "question": "Aku lah yang tetap memelukmu erat, saat kau berfikir______ berpaling.",
+        "answer": "Mungkinkah"
+    },
+    {
+        "question": "Akulah serpihan kisah masa lalumu, yang ____ ingin tau keadaanmu.",
+        "answer": "Sekedar"
+    },
+    {
+        "question": "Sepenuhnya akuuu, ingin memelukmuuu, _____ penuh harapan, tuk mencintaimu.",
+        "answer": "Mendekap"
+    },
+    {
+        "question": "Aku lah yang tetap memelukmu erat, saat kau berfikir______ berpaling.",
+        "answer": "Mungkinkah"
+    },
+    {
+        "question": "Untuk apa? Untuk apa cinta tanpa_____, untuk apa cinta tanpa perbuatan.",
+        "answer": "Kejujuran"
+    },
+    {
+        "question": "Dengar laraku, suara hati ini _____ namamu, karna separuh aku, dirimu",
+        "answer": "Memanggil"
+    },
+    {
+        "question": "Kau yang kuinginkan, meski tak ku____, kau yang kubayangkan, yang slalu kuimpikan.",
+        "answer": "Ungkapkan"
+    },
+    {
+        "question": "Cinta itu ruang dan waktu, tak sekejap harus mau. Cinta butuh ruang yang sepi, tuk______ hati.",
+        "answer": "Mengutarakan"
+    },
+    {
+        "question": "Kau yang kuinginkan, meski tak ku____, kau yang kubayangkan, yang slalu kuimpikan.",
+        "answer": "Ungkapkan"
+    },
+    {
+        "question": "Kau tau sejak pertama bertemu, terbayang _____ indah di matamu, kau berikan tatapan cinta untukku.",
+        "answer": "Senyum"
+    },
+    {
+        "question": "Aku tak bisa _____, bila kau tak ada di sini, aku tak habis pikirkan, bila kau tak lagi temani aku.",
+        "answer": "Bayangkan"
+    },
+    {
+        "question": "Tak terkira, di sampingmu, adalah hal _____ yang pernah kuinginkan.",
+        "answer": "Terindah"
+    },
+    {
+        "question": "Kau tau sejak pertama bertemu, terbayang _____ indah di matamu, kau berikan tatapan cinta untukku.",
+        "answer": "Senyum"
+    },
+    {
+        "question": "Untuk apa? Untuk apa cinta tanpa_____, untuk apa cinta tanpa perbuatan.",
+        "answer": "Kejujuran"
+    },
+    {
+        "question": "Akulah serpihan kisah masa lalumu, yang ____ ingin tau keadaanmu.",
+        "answer": "Sekedar"
+    },
+    {
+        "question": "Dia dia dia cinta yang kutunggu tunggu tunggu, dia dia dia _____ hidupku.",
+        "answer": "Lengkapi"
+    },
+    {
+        "question": "Bila tak selamanya kita bisa bersama, haruskah _____ di sini, dan bila selamanya kita bisa bersama, kusimpan cinta ini.",
+        "answer": "Menunggumu"
+    },
+    {
+        "question": "Cinta itu ruang dan waktu, tak sekejap harus mau. Cinta butuh ruang yang sepi, tuk______ hati.",
+        "answer": "Mengutarakan"
+    },
+    {
+        "question": "Akulah serpihan kisah masa lalumu, yang ____ ingin tau keadaanmu.",
+        "answer": "Sekedar"
+    },
+    {
+        "question": "Sepenuhnya akuuu, ingin memelukmuuu, _____ penuh harapan, tuk mencintaimu.",
+        "answer": "Mendekap"
+    },
+    {
+        "question": "Berada di pelukanmu mengajarkanku apa artinya______ kesempurnaan cinta.",
+        "answer": "Kenyamanan"
+    },
+    {
+        "question": "Mana mungkin selimut tetangga, hangati _____ dalam kedinginan, malam-malam panjang, setiap tidurku selalu kesepian.",
+        "answer": "Tubuhku"
+    },
+    {
+        "question": "Tak bisa tuk teruskan, Dunia kita_____, Bila memang ini ujungnya.",
+        "answer": "Berbeda"
+    },
+    {
+        "question": "Cinta jangan pernah kau coba _____ karna disini ku butuh kamu.",
+        "answer": "Pergi"
+    },
+    {
+        "question": "Terlalu manis untuk dilupakan, kenangan yang indah _____ tinggalah mimpi.",
+        "answer": "Bersamamu"
+    },
+    {
+        "question": "Kau harus bisa berlapang dada. Kau harus bisa ambil______.",
+        "answer": "Hikmahnya"
+    },
+    {
+        "question": "Berada di pelukanmu mengajarkanku apa artinya______ kesempurnaan cinta.",
+        "answer": "Kenyamanan"
+    },
+    {
+        "question": "Mengapa kau pergi, mengapa kau pergi, di saat aku mulai mencintaimu, berharap engkau jadi ____ hatiku, malah kau pergi jauh dari hidupku.",
+        "answer": "Kekasih"
+    },
+    {
+        "question": "Kupetik bintang, untuk kau simpan, Cahayanya tenang, berikan kau perlindungan, sebagai pengingat teman, juga sebagai ______ semua tantangan.",
+        "answer": "Jawaban"
+    },
+    {
+        "question": "Bila memang harus berpisah, aku akan tetap ceria, bila memang ini______, kau kan tetap ada dalam jiwa.",
+        "answer": "Ujungnya"
+    },
+    {
+        "question": "Berada di pelukanmu mengajarkanku apa artinya______ kesempurnaan cinta.",
+        "answer": "Kenyamanan"
+    },
+    {
+        "question": "Ku suka dirinya, mungkin aku sayang, namun _____ mungkin, kau menjadi milikku.",
+        "answer": "Apakah"
+    },
+    {
+        "question": "Aku sayang padamu, aku cinta padamu, semua kan ku_____ demi kebahagiaanmu.",
+        "answer": "Lakukan"
+    },
+    {
+        "question": "Ku suka dirinya, mungkin aku sayang, namun _____ mungkin, kau menjadi milikku.",
+        "answer": "Apakah"
+    },
+    {
+        "question": "Bila rindu ini, masih milkmu, ______ sebuah tanya untukmu, harus berapa lama aku menunggumu.",
+        "answer": "Kuhadirkan"
+    },
+    {
+        "question": "Tak terkira, di sampingmu, adalah hal _____ yang pernah kuinginkan.",
+        "answer": "Terindah"
+    },
+    {
+        "question": "Dia dia dia cinta yang kutunggu tunggu tunggu, dia dia dia _____ hidupku.",
+        "answer": "Lengkapi"
+    },
+    {
+        "question": "Ada ruang hatiku kini kau sentuh, aku bukan jatuh _____ namun aku jatuh hati.",
+        "answer": "Cinta"
+    },
+    {
+        "question": "Kau harus bisa berlapang dada. Kau harus bisa ambil______.",
+        "answer": "Hikmahnya"
+    },
+    {
+        "question": "Terlalu manis untuk dilupakan, kenangan yang indah _____ tinggalah mimpi.",
+        "answer": "Bersamamu"
+    },
+    {
+        "question": "Ku cinta kau, ku cinta kau, hanya kamu di hatiku, takkan pernah kan ______, sampai kau jadi milikku",
+        "answer": "Terganti"
+    },
+    {
+        "question": "Mengapa kau pergi, mengapa kau pergi, di saat aku mulai mencintaimu, berharap engkau jadi ____ hatiku, malah kau pergi jauh dari hidupku.",
+        "answer": "Kekasih"
+    },
+    {
+        "question": "Ku suka dirinya, mungkin aku sayang, namun _____ mungkin, kau menjadi milikku.",
+        "answer": "Apakah"
+    },
+    {
+        "question": "Untuk apa? Untuk apa cinta tanpa_____, untuk apa cinta tanpa perbuatan.",
+        "answer": "Kejujuran"
+    },
+    {
+        "question": "Kau harus bisa berlapang dada. Kau harus bisa ambil______.",
+        "answer": "Hikmahnya"
+    },
+    {
+        "question": "Kau yang kuinginkan, meski tak ku____, kau yang kubayangkan, yang slalu kuimpikan.",
+        "answer": "Ungkapkan"
+    },
+    {
+        "question": "Kau harus bisa berlapang dada. Kau harus bisa ambil______.",
+        "answer": "Hikmahnya"
+    },
+    {
+        "question": "Ayo putra bangsa, harumkan negeri ini, ____ kita bangga, Indonesia.",
+        "answer": "Jadikan"
+    },
+    {
+        "question": "Untuk apa? Untuk apa cinta tanpa_____, untuk apa cinta tanpa perbuatan.",
+        "answer": "Kejujuran"
+    },
+    {
+        "question": "Dengar laraku, suara hati ini _____ namamu, karna separuh aku, dirimu",
+        "answer": "Memanggil"
+    },
+    {
+        "question": "Sepenuhnya akuuu, ingin memelukmuuu, _____ penuh harapan, tuk mencintaimu.",
+        "answer": "Mendekap"
+    },
+    {
+        "question": "Dia dia dia cinta yang kutunggu tunggu tunggu, dia dia dia _____ hidupku.",
+        "answer": "Lengkapi"
+    },
+    {
+        "question": "Cinta itu ruang dan waktu, tak sekejap harus mau. Cinta butuh ruang yang sepi, tuk______ hati.",
+        "answer": "Mengutarakan"
+    },
+    {
+        "question": "Mungkin suatu saat nanti, kau _____ bahagia meski tak bersamaku.",
+        "answer": "Temukan"
+    },
+    {
+        "question": "Untuk apa? Untuk apa cinta tanpa_____, untuk apa cinta tanpa perbuatan. Tak ada artinya.",
+        "answer": "Kejujuran"
+    },
+    {
+        "question": "Aku tak bisa _____, bila kau tak ada di sini, aku tak habis pikirkan, bila kau tak lagi temani aku.",
+        "answer": "Bayangkan"
+    },
+    {
+        "question": "Garuda di dadaku, garuda kebanggaanku, ku yakin hari ini pasti menang, kobarkan ______, tunjukkan keinginanmu, ku yakin hari ini pasti menang.",
+        "answer": "Semangatmu"
+    },
+    {
+        "question": "Dan terjadi lagi, kisah lama yang _____ kembali, kau terluka lagi, dari cinta yang rumit kau jalani.",
+        "answer": "Terulang"
+    },
+    {
+        "question": "Tak bisa tuk teruskan, Dunia kita_____, Bila memang ini ujungnya.",
+        "answer": "Berbeda"
+    },
+    {
+        "question": "Sepenuhnya akuuu, ingin memelukmuuu, _____ penuh harapan, tuk mencintaimu.",
+        "answer": "Mendekap"
+    },
+    {
+        "question": "Mengapa kau pergi, mengapa kau pergi, di saat aku mulai mencintaimu, berharap engkau jadi ____ hatiku, malah kau pergi jauh dari hidupku.",
+        "answer": "Kekasih"
+    },
+    {
+        "question": "Kau dan aku tercipta oleh waktu, hanya untuk saling mencintai, mungkin di_____ bersama, rajut kasih jalin cinta.",
+        "answer": "Takdirkan"
+    },
+    {
+        "question": "Cinta itu ruang dan waktu, tak sekejap harus mau. Cinta butuh ruang yang sepi, tuk______ hati.",
+        "answer": "Mengutarakan"
+    },
+    {
+        "question": "Terlalu manis untuk dilupakan, kenangan yang indah _____ tinggalah mimpi.",
+        "answer": "Bersamamu"
+    },
+    {
+        "question": "Cinta jangan pernah kau coba _____ karna disini ku butuh kamu.",
+        "answer": "Pergi"
+    },
+    {
+        "question": "Bila rindu ini, masih milkmu, ______ sebuah tanya untukmu, harus berapa lama aku menunggumu.",
+        "answer": "Kuhadirkan"
+    },
+    {
+        "question": "Kupetik bintang, untuk kau simpan, Cahayanya tenang, berikan kau perlindungan, sebagai pengingat teman, juga sebagai ______ semua tantangan.",
+        "answer": "Jawaban"
+    },
+    {
+        "question": "Ayo putra bangsa, harumkan negeri ini, ____ kita bangga, Indonesia.",
+        "answer": "Jadikan"
+    },
+    {
+        "question": "Dengar laraku, suara hati ini _____ namamu, karna separuh aku, dirimu",
+        "answer": "Memanggil"
+    },
+    {
+        "question": "Berada di pelukanmu mengajarkanku apa artinya______ kesempurnaan cinta.",
+        "answer": "Kenyamanan"
+    },
+    {
+        "question": "Ayo putra bangsa, harumkan negeri ini, ____ kita bangga, Indonesia.",
+        "answer": "Jadikan"
+    },
+    {
+        "question": "Kau yang kuinginkan, meski tak ku____, kau yang kubayangkan, yang slalu kuimpikan.",
+        "answer": "Ungkapkan"
+    },
+    {
+        "question": "Kau harus bisa berlapang dada. Kau harus bisa ambil______.",
+        "answer": "Hikmahnya"
+    },
+    {
+        "question": "Dengar laraku, suara hati ini _____ namamu, karna separuh aku, dirimu",
+        "answer": "Memanggil"
+    },
+    {
+        "question": "Kau harus bisa berlapang dada. Kau harus bisa ambil______.",
+        "answer": "Hikmahnya"
+    },
+    {
+        "question": "Cinta jangan pernah kau coba _____ karna disini ku butuh kamu.",
+        "answer": "Pergi"
+    },
+    {
+        "question": "Untuk apa? Untuk apa cinta tanpa_____, untuk apa cinta tanpa perbuatan.",
+        "answer": "Kejujuran"
+    },
+    {
+        "question": "Ku suka dirinya, mungkin aku sayang, namun _____ mungkin, kau menjadi milikku.",
+        "answer": "Apakah"
+    },
+    {
+        "question": "Ada pelangi, di bola matamu, dan _____ diri tuk bilang aku sayang padamu.",
+        "answer": "Memaksa"
+    },
+    {
+        "question": "Kau adalah yang terindah, yang membuat hatiku tenang, mencintai kamu takkan pernah takut, sebab kau _____ segala kurangku.",
+        "answer": "Terima"
+    },
+    {
+        "question": "Bawalah aku ke dalam, ke dalam hangat dirimu, bawalah aku _____ menari dalam pelukanmu.",
+        "answer": "Kesana"
+    },
+    {
+        "question": "Ku bisa hadapi_____ terluka, yang pernah kurasa di waktu dulu.",
+        "answer": "Perihnya"
+    },
+    {
+        "question": "Aku tak bisa _____, bila kau tak ada di sini, aku tak habis pikirkan, bila kau tak lagi temani aku.",
+        "answer": "Bayangkan"
+    },
+    {
+        "question": "Garuda di dadaku, garuda kebanggaanku, ku yakin hari ini pasti menang, kobarkan ______, tunjukkan keinginanmu, ku yakin hari ini pasti menang.",
+        "answer": "Semangatmu"
+    },
+    {
+        "question": "Akulah serpihan kisah masa lalumu, yang ____ ingin tau keadaanmu.",
+        "answer": "Sekedar"
+    },
+    {
+        "question": "Kupetik bintang, untuk kau simpan, Cahayanya tenang, berikan kau perlindungan, sebagai pengingat teman, juga sebagai ______ semua tantangan.",
+        "answer": "Jawaban"
+    },
+    {
+        "question": "Ku cinta kau, ku cinta kau, hanya kamu di hatiku, takkan pernah kan ______, sampai kau jadi milikku",
+        "answer": "Terganti"
+    },
+    {
+        "question": "Aku sayang padamu, aku cinta padamu, semua kan ku_____ demi kebahagiaanmu.",
+        "answer": "Lakukan"
+    },
+    {
+        "question": "Kau tau sejak pertama bertemu, terbayang _____ indah di matamu, kau berikan tatapan cinta untukku.",
+        "answer": "Senyum"
+    },
+    {
+        "question": "Akulah serpihan kisah masa lalumu, yang ____ ingin tau keadaanmu.",
+        "answer": "Sekedar"
+    },
+    {
+        "question": "Kau harus bisa berlapang dada. Kau harus bisa ambil______.",
+        "answer": "Hikmahnya"
+    },
+    {
+        "question": "Cinta itu ruang dan waktu, tak sekejap harus mau. Cinta butuh ruang yang sepi, tuk______ hati.",
+        "answer": "Mengutarakan"
+    },
+    {
+        "question": "Bila memang harus berpisah, aku akan tetap ceria, bila memang ini______, kau kan tetap ada dalam jiwa.",
+        "answer": "Ujungnya"
+    },
+    {
+        "question": "Ku suka dirinya, mungkin aku sayang, namun _____ mungkin, kau menjadi milikku.",
+        "answer": "Apakah"
+    },
+    {
+        "question": "Sampai saat ini, rasaku ______ di sini, rasa yang tak akan hilang oleh waktu.",
+        "answer": "Bertahan"
+    },
+    {
+        "question": "Ada ruang hatiku kini kau sentuh, aku bukan jatuh _____ namun aku jatuh hati.",
+        "answer": "Cinta"
+    },
+    {
+        "question": "Ada pelangi, di bola matamu, dan _____ diri tuk bilang aku sayang padamu.",
+        "answer": "Memaksa"
+    },
+    {
+        "question": "Cinta jangan pernah kau coba _____ karna disini ku butuh kamu.",
+        "answer": "Pergi"
+    },
+    {
+        "question": "Tak terkira, di sampingmu, adalah hal _____ yang pernah kuinginkan.",
+        "answer": "Terindah"
+    },
+    {
+        "question": "Bila memang harus berpisah, aku akan tetap ceria, bila memang ini______, kau kan tetap ada dalam jiwa.",
+        "answer": "Ujungnya"
+    },
+    {
+        "question": "Mana mungkin selimut tetangga, hangati _____ dalam kedinginan, malam-malam panjang, setiap tidurku selalu kesepian.",
+        "answer": "Tubuhku"
+    },
+    {
+        "question": "Cinta itu ruang dan waktu, tak sekejap harus mau. Cinta butuh ruang yang sepi, tuk______ hati.",
+        "answer": "Mengutarakan"
+    },
+    {
+        "question": "Kau tau sejak pertama bertemu, terbayang _____ indah di matamu, kau berikan tatapan cinta untukku.",
+        "answer": "Senyum"
+    },
+    {
+        "question": "Mengapa kau pergi, mengapa kau pergi, di saat aku mulai mencintaimu, berharap engkau jadi ____ hatiku, malah kau pergi jauh dari hidupku.",
+        "answer": "Kekasih"
+    },
+    {
+        "question": "Ku suka dirinya, mungkin aku sayang, namun _____ mungkin, kau menjadi milikku.",
+        "answer": "Apakah"
+    },
+    {
+        "question": "Garuda di dadaku, garuda kebanggaanku, ku yakin hari ini pasti menang, kobarkan ______, tunjukkan keinginanmu, ku yakin hari ini pasti menang.",
+        "answer": "Semangatmu"
+    },
+    {
+        "question": "Kau harus bisa berlapang dada. Kau harus bisa ambil______.",
+        "answer": "Hikmahnya"
+    },
+    {
+        "question": "Cinta jangan pernah kau coba _____ karna disini ku butuh kamu.",
+        "answer": "Pergi"
+    },
+    {
+        "question": "Ku suka dirinya, mungkin aku sayang, namun _____ mungkin, kau menjadi milikku.",
+        "answer": "Apakah"
+    },
+    {
+        "question": "Cinta itu ruang dan waktu, tak sekejap harus mau. Cinta butuh ruang yang sepi, tuk______ hati.",
+        "answer": "Mengutarakan"
+    },
+    {
+        "question": "Dan terjadi lagi, kisah lama yang _____ kembali, kau terluka lagi, dari cinta yang rumit kau jalani.",
+        "answer": "Terulang"
+    },
+    {
+        "question": "Kau tau sejak pertama bertemu, terbayang _____ indah di matamu, kau berikan tatapan cinta untukku.",
+        "answer": "Senyum"
+    },
+    {
+        "question": "Ku bisa hadapi_____ terluka, yang pernah kurasa di waktu dulu.",
+        "answer": "Perihnya"
+    },
+    {
+        "question": "Berada di pelukanmu mengajarkanku apa artinya______ kesempurnaan cinta.",
+        "answer": "Kenyamanan"
+    },
+    {
+        "question": "Kau yang kuinginkan, meski tak ku____, kau yang kubayangkan, yang slalu kuimpikan.",
+        "answer": "Ungkapkan"
+    },
+    {
+        "question": "Garuda di dadaku, garuda kebanggaanku, ku yakin hari ini pasti menang, kobarkan ______, tunjukkan keinginanmu, ku yakin hari ini pasti menang.",
+        "answer": "Semangatmu"
+    },
+    {
+        "question": "Kupetik bintang, untuk kau simpan, Cahayanya tenang, berikan kau perlindungan, sebagai pengingat teman, juga sebagai ______ semua tantangan.",
+        "answer": "Jawaban"
+    },
+    {
+        "question": "Aku sayang padamu, aku cinta padamu, semua kan ku_____ demi kebahagiaanmu.",
+        "answer": "Lakukan"
+    },
+    {
+        "question": "Kupetik bintang, untuk kau simpan, Cahayanya tenang, berikan kau perlindungan, sebagai pengingat teman, juga sebagai ______ semua tantangan.",
+        "answer": "Jawaban"
+    },
+    {
+        "question": "Mungkin suatu saat nanti, kau _____ bahagia meski tak bersamaku.",
+        "answer": "Temukan"
+    },
+    {
+        "question": "Terlalu manis untuk dilupakan, kenangan yang indah _____ tinggalah mimpi.",
+        "answer": "Bersamamu"
+    },
+    {
+        "question": "Ku suka dirinya, mungkin aku sayang, namun _____ mungkin, kau menjadi milikku.",
+        "answer": "Apakah"
+    },
+    {
+        "question": "Ayo putra bangsa, harumkan negeri ini, ____ kita bangga, Indonesia.",
+        "answer": "Jadikan"
+    },
+    {
+        "question": "Ku cinta kau, ku cinta kau, hanya kamu di hatiku, takkan pernah kan ______, sampai kau jadi milikku",
+        "answer": "Terganti"
+    },
+    {
+        "question": "Aku lah yang tetap memelukmu erat, saat kau berfikir______ berpaling.",
+        "answer": "Mungkinkah"
+    },
+    {
+        "question": "Ada ruang hatiku kini kau sentuh, aku bukan jatuh _____ namun aku jatuh hati.",
+        "answer": "Cinta"
+    },
+    {
+        "question": "Akulah serpihan kisah masa lalumu, yang ____ ingin tau keadaanmu.",
+        "answer": "Sekedar"
+    },
+    {
+        "question": "Bawalah aku ke dalam, ke dalam hangat dirimu, bawalah aku _____ menari dalam pelukanmu.",
+        "answer": "Kesana"
+    },
+    {
+        "question": "Garuda di dadaku, garuda kebanggaanku, ku yakin hari ini pasti menang, kobarkan ______, tunjukkan keinginanmu, ku yakin hari ini pasti menang.",
+        "answer": "Semangatmu"
+    },
+    {
+        "question": "Dan terjadi lagi, kisah lama yang _____ kembali, kau terluka lagi, dari cinta yang rumit kau jalani.",
+        "answer": "Terulang"
+    },
+    {
+        "question": "Cinta jangan pernah kau coba _____ karna disini ku butuh kamu.",
+        "answer": "Pergi"
+    },
+    {
+        "question": "Akulah serpihan kisah masa lalumu, yang ____ ingin tau keadaanmu.",
+        "answer": "Sekedar"
+    },
+    {
+        "question": "Sepenuhnya akuuu, ingin memelukmuuu, _____ penuh harapan, tuk mencintaimu.",
+        "answer": "Mendekap"
+    },
+    {
+        "question": "Berada di pelukanmu mengajarkanku apa artinya______ kesempurnaan cinta.",
+        "answer": "Kenyamanan"
+    },
+    {
+        "question": "Mana mungkin selimut tetangga, hangati _____ dalam kedinginan, malam-malam panjang, setiap tidurku selalu kesepian.",
+        "answer": "Tubuhku"
+    },
+    {
+        "question": "Kau tau sejak pertama bertemu, terbayang _____ indah di matamu, kau berikan tatapan cinta untukku.",
+        "answer": "Senyum"
+    },
+    {
+        "question": "Setidaknya diriku pernah berjuang, meski tak pernah ternilai di matamu, setidaknya ku pernah menanti, _____ melawan sepi hatiku.",
+        "answer": "Terkapar"
+    },
+    {
+        "question": "Bila memang harus berpisah, aku akan tetap ceria, bila memang ini______, kau kan tetap ada dalam jiwa.",
+        "answer": "Ujungnya"
+    },
+    {
+        "question": "Kupetik bintang, untuk kau simpan, Cahayanya tenang, berikan kau perlindungan, sebagai pengingat teman, juga sebagai ______ semua tantangan.",
+        "answer": "Jawaban"
+    },
+    {
+        "question": "Ku cinta kau, ku cinta kau, hanya kamu di hatiku, takkan pernah kan ______, sampai kau jadi milikku",
+        "answer": "Terganti"
+    },
+    {
+        "question": "Kau adalah yang terindah, yang membuat hatiku tenang, mencintai kamu takkan pernah takut, sebab kau _____ segala kurangku.",
+        "answer": "Terima"
+    },
+    {
+        "question": "Mana mungkin selimut tetangga, hangati _____ dalam kedinginan, malam-malam panjang, setiap tidurku selalu kesepian.",
+        "answer": "Tubuhku"
+    },
+    {
+        "question": "Aku tak bisa _____, bila kau tak ada di sini, aku tak habis pikirkan, bila kau tak lagi temani aku.",
+        "answer": "Bayangkan"
+    },
+    {
+        "question": "Tak bisa tuk teruskan, Dunia kita_____, Bila memang ini ujungnya.",
+        "answer": "Berbeda"
+    },
+    {
+        "question": "Ku cinta kau, ku cinta kau, hanya kamu di hatiku, takkan pernah kan ______, sampai kau jadi milikku",
+        "answer": "Terganti"
+    },
+    {
+        "question": "Ada ruang hatiku kini kau sentuh, aku bukan jatuh _____ namun aku jatuh hati.",
+        "answer": "Cinta"
+    },
+    {
+        "question": "Ayo putra bangsa, harumkan negeri ini, ____ kita bangga, Indonesia.",
+        "answer": "Jadikan"
+    },
+    {
+        "question": "Mungkin suatu saat nanti, kau _____ bahagia meski tak bersamaku.",
+        "answer": "Temukan"
+    },
+    {
+        "question": "Tak bisa tuk teruskan, Dunia kita_____, Bila memang ini ujungnya.",
+        "answer": "Berbeda"
+    },
+    {
+        "question": "Ada ruang hatiku kini kau sentuh, aku bukan jatuh _____ namun aku jatuh hati.",
+        "answer": "Cinta"
+    },
+    {
+        "question": "Ku suka dirinya, mungkin aku sayang, namun _____ mungkin, kau menjadi milikku.",
+        "answer": "Apakah"
+    },
+    {
+        "question": "Ada yang lain, di senyummu, yang_____ lidahku gugup tak bergerak.",
+        "answer": "Membuat"
+    },
+    {
+        "question": "Aku sayang padamu, aku cinta padamu, semua kan ku_____ demi kebahagiaanmu.",
+        "answer": "Lakukan"
+    },
+    {
+        "question": "Ayo putra bangsa, harumkan negeri ini, ____ kita bangga, Indonesia.",
+        "answer": "Jadikan"
+    },
+    {
+        "question": "Ku bisa hadapi_____ terluka, yang pernah kurasa di waktu dulu.",
+        "answer": "Perihnya"
+    }
+]
