@@ -86,7 +86,7 @@ nano config.json
 
 - dan setelah itu Ctrl + X + y 
 
-lalu lanjut ke install dependensi
+### lalu lanjut ke install dependensi
 
 Install semua dependensi:
 ```bash
