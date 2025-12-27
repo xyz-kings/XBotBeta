@@ -69,6 +69,13 @@ Masuk ke folder project:
 ```bash
 cd XBotBeta
 ```
+
+Setelah masuk folder project:
+- jangan langsung buka tapi masuk ke config.json caranya 
+- dan setelah itu Ctrl + X + y 
+
+lalu lanjut ke install dependensi
+
 Install semua dependensi:
 ```bash
 yarn install
