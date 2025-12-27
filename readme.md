@@ -35,29 +35,7 @@ Singkatnya: bot serba guna, bukan sok pinter tapi kepake 🔧
  • Jangan nyinyir
  • Jangan ngamuk
  
-### Langsung lapor lewat repo 😎
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+~ Langsung lapor lewat repo ~
 
 ---
 
