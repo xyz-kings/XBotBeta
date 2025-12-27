@@ -1,8 +1,63 @@
 # XBotBeta
 
-Bot WhatsApp berbasis Node.js yang dapat dijalankan di Termux.
+## ⚠️ PERHATIAN! INI MASIH BETA ⚠️
+Bot WhatsApp ini masih tahap pengembangan. Fiturnya belum lengkap, kadang rewel, kadang nurut—maklum masih belajar jalan 🍼
 
-Repository ini berisi source code bot beserta sistem handler, fitur, dan konfigurasi dasar.
+## 📌 Wajib ikuti langkah-langkah instalasi secara berurutan
+Jangan loncat-loncat. Salah satu langkah dilewatin = bot bisa ngambek dan nggak mau jalan.
+
+## 🔔 Follow & pantau terus repository ini
+Update resmi, perbaikan bug, dan fitur baru CUMA dirilis di repo ini.
+Kalau dapet versi aneh-aneh di luar sini → itu bukan tanggung jawab kami 
+
+~ Nantinya bakal ada versi STABLE (non-beta), jadi stay tune! ~
+
+---
+## 🤖 Tentang Bot Ini
+Ini BUKAN bot AI.
+Fokusnya ke tools & utilitas, seperti:
+• Downloader
+• Converter
+• Search
+• Random tools
+• Game ringan
+• Berita
+• Fitur fun
+• Fitur grup
+• Stalking tools
+
+---
+Singkatnya: bot serba guna, bukan sok pinter tapi kepake 🔧
+
+---
+
+### 💬 Kalau nemu bug, error, atau ide fitur:
+ • Jangan nyinyir
+ • Jangan ngamuk
+ 
+### Langsung lapor lewat repo 😎
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 
