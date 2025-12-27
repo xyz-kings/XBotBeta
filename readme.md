@@ -17,13 +17,21 @@ Kalau dapet versi aneh-aneh di luar sini → itu bukan tanggung jawab kami
 Ini BUKAN bot AI.
 Fokusnya ke tools & utilitas, seperti:
 • Downloader
+
 • Converter
+
 • Search
+
 • Random tools
+
 • Game ringan
+
 • Berita
+
 • Fitur fun
+
 • Fitur grup
+
 • Stalking tools
 
 ---
