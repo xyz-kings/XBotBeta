@@ -1,19 +1,19 @@
-## XBotBeta
+# XBotBeta
 
-# ⚠️ PERHATIAN! INI MASIH BETA ⚠️
+### ⚠️ PERHATIAN! INI MASIH BETA ⚠️
 Bot WhatsApp ini masih tahap pengembangan. Fiturnya belum lengkap, kadang rewel, kadang nurut—maklum masih belajar jalan 🍼
 
-# 📌 Wajib ikuti langkah-langkah instalasi secara berurutan
+### 📌 Wajib ikuti langkah-langkah instalasi secara berurutan
 Jangan loncat-loncat. Salah satu langkah dilewatin = bot bisa ngambek dan nggak mau jalan.
 
-# 🔔 Follow & pantau terus repository ini
+### 🔔 Follow & pantau terus repository ini
 Update resmi, perbaikan bug, dan fitur baru CUMA dirilis di repo ini.
 Kalau dapet versi aneh-aneh di luar sini → itu bukan tanggung jawab kami 
 
 ~ Nantinya bakal ada versi STABLE (non-beta), jadi stay tune! ~
 
 ---
-# 🤖 Tentang Bot Ini
+### 🤖 Tentang Bot Ini
 Ini BUKAN bot AI.
 Fokusnya ke tools & utilitas, seperti:
 • Downloader
