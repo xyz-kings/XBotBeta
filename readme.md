@@ -141,8 +141,15 @@ Edit file config.json untuk menyesuaikan:
 
 ° Prefix
 
-• API key (wajib daftar di website kami https://xrest-api.vercel.app)
+• API key (wajib daftar di website kami)  
+  👉 https://xrest-api.vercel.app  
 
+  <details>
+  <summary>📸 Contoh / Screenshot</summary>
+
+  ![API Key Preview](https://files.catbox.moe/j0zplr.jpg)
+
+  </details>
 
 Pastikan format JSON benar agar bot tidak error saat dijalankan.
 
