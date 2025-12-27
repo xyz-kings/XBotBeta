@@ -9,7 +9,10 @@ Repository ini berisi source code bot beserta sistem handler, fitur, dan konfigu
 ## Persyaratan
 
 Pastikan perangkat sudah terpasang:
-- Termux
+- Termux jika belum terinstall maka bisa klik di bawah ini 
+   ```bash
+   [![Download Termux](https://img.shields.io/badge/Download-Termux-brightgreen?style=for-the-badge)](https://f-droid.org/F-Droid.apk)
+   ```
 - Node.js
 - Git
 - Yarn
