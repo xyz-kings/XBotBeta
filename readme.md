@@ -86,6 +86,16 @@ Setelah masuk folder project:
 ```bash
 nano config.json
 ```
+Edit bagian ini 
+```bash
+  "ownerNumber": "6287718203240@s.whatsapp.net",
+  "ownerName": "Xyz Kings",
+  "packName": "Sticker By",
+  "authorSticker": "©Xyz kings",
+  "apiKey": "Paste Key dari daftar dan ambil https://xrest-api.vercel.app",
+  "baseURL": "https://xrest-api.vercel.app",
+  "copyright": "> _© 2025 Xyz Kings - All Rights Reserved_"
+```
 
 - dan setelah itu Ctrl + X + y 
 
