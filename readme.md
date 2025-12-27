@@ -17,12 +17,12 @@ Pastikan perangkat sudah terpasang:
 Install kebutuhan di Termux:
 ```bash
 pkg update && pkg upgrade
-pkg install git nodejs yarn
+pkg install git nodejs yarn 
 ```
 
 ---
 
-#Instalasi
+Instalasi
 
 Clone repository:
 ```bash
@@ -52,103 +52,7 @@ yarn start
 ```
 
 Setelah dijalankan, pairing Code akan muncul di terminal.
-pcmuncul dan langsung ke WhatsApp untuk menghubungkan bot Xyz ini.
-
-
----
-
-## Konfigurasi
-
-Edit file config.json untuk menyesuaikan:
-
-• Nomor owner
-
-• Nama bot
-
-° Prefix
-
-• API key (wajib daftar di website kami https://xrest-api.vercel.app)
-
-
-Pastikan format JSON benar agar bot tidak error saat dijalankan.
-
-
----
-
-## Catatan
-
-Jangan menghapus file .json yang digunakan sebagai database.
-
-Jika terjadi error, periksa log di terminal.
-
-Gunakan Node.js v25.
-
-Script ini tidak diperjualbelikan.
-#ncul dan langsung ke WhatsApp untuk menghubungkan bot Xyz ini.
-
-
----
-
-## Konfigurasi
-
-Edit file config.json untuk menyesuaikan:
-
-• Nomor owner
-
-• Nama bot
-
-° Prefix
-
-• API key (wajib daftar di website kami https://xrest-api.vercel.app)
-
-
-Pastikan format JSON benar agar bot tidak error saat dijalankan.
-
-
----
-
-## Catatan
-
-Jangan menghapus file .json yang digunakan sebagai database.
-
-Jika terjadi error, periksa log di terminal.
-
-Gunakan Node.js v25.
-
-Script ini tidak diperjualbelikan.
-#ng code muncul dan langsung ke WhatsApp untuk menghubungkan bot Xyz ini.
-
-
----
-
-## Konfigurasi
-
-Edit file config.json untuk menyesuaikan:
-
-• Nomor owner
-
-• Nama bot
-
-° Prefix
-
-• API key (wajib daftar di website kami https://xrest-api.vercel.app)
-
-
-Pastikan format JSON benar agar bot tidak error saat dijalankan.
-
-
----
-
-## Catatan
-
-Jangan menghapus file .json yang digunakan sebagai database.
-
-Jika terjadi error, periksa log di terminal.
-
-Gunakan Node.js v25.
-
-Script ini tidak diperjualbe#likan.
- code muncul dan langsung ke WhatsApp untuk menghubungkan bot Xyz ini.
+pairing code muncul dan langsung ke WhatsApp untuk menghubungkan bot Xyz ini.
 
 
 ---
