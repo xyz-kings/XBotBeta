@@ -89,11 +89,17 @@ nano config.json
 Edit bagian ini 
 ```bash
   "ownerNumber": "628xxxx@s.whatsapp.net",
+  
   "ownerName": "Rename",
+  
   "packName": "Sticker By",
+  
   "authorSticker": "©Rename",
+  
   "apiKey": "Paste Key dari daftar dan ambil https://xrest-api.vercel.app",
+  
   "baseURL": "https://xrest-api.vercel.app",
+  
   "copyright": "> _© 2025 Rename - All Rights Reserved_"
 ```
 
