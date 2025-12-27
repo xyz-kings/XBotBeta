@@ -1,0 +1,50 @@
+{
+  "139904751247575@lid": {
+    "userId": "139904751247575@lid",
+    "userName": "139904751247575",
+    "points": 9999998,
+    "rank": "💎 Immortal",
+    "level": 8,
+    "totalGames": 10000008,
+    "gamesWon": 10000003,
+    "gamesLost": 5,
+    "winRate": 100,
+    "winStreak": 0,
+    "maxWinStreak": 10000,
+    "dailyStreak": 0,
+    "lastPlayed": "2025-12-27T04:30:26.146Z",
+    "gameStats": {
+      "played": 10000008,
+      "won": 10000003
+    },
+    "wrongCount": 0,
+    "isBanned": true,
+    "banUntil": "2025-12-27T05:30:26.150Z",
+    "achievements": [],
+    "firstPlayed": "2025-12-27T01:43:41.878Z"
+  },
+  "191860987437213@lid": {
+    "userId": "191860987437213@lid",
+    "userName": "191860987437213",
+    "points": 3,
+    "rank": "🐣 Pemula",
+    "level": 1,
+    "totalGames": 3,
+    "gamesWon": 3,
+    "gamesLost": 0,
+    "winRate": 100,
+    "winStreak": 3,
+    "maxWinStreak": 3,
+    "dailyStreak": 0,
+    "lastPlayed": "2025-12-27T05:22:09.116Z",
+    "gameStats": {
+      "played": 3,
+      "won": 3
+    },
+    "wrongCount": 0,
+    "isBanned": false,
+    "banUntil": null,
+    "achievements": [],
+    "firstPlayed": "2025-12-27T02:56:23.339Z"
+  }
+}
