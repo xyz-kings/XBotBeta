@@ -97,7 +97,7 @@ Silahkan pilih 2 pilihan di bawah ini
 4. Pindahkan file `config.json` ke folder bot di Termux dengan command berikut:
 
 ```bash
-mv config.json /data/data/com.termux/files/home/XBotBeta
+mv /storage/emulated/0/Download/config.json /data/data/com.termux/files/home/XBotBeta
 ```
 </details>
 
