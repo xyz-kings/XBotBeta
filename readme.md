@@ -81,7 +81,26 @@ Masuk ke folder project:
 cd XBotBeta
 ```
 
-Setelah masuk folder project:
+## Setelah masuk folder project:
+
+<details>
+<summary><b>🔑 Summary 1 — Login & Ambil Config</b></summary>
+
+1. Login ke website:
+   https://xrest-api.vercel.app/login.html
+
+2. Setelah login berhasil, lanjut ke:
+   https://xrest-api.vercel.app/config.html
+
+3. Download / ambil file `config.json`
+
+4. Pindahkan file `config.json` ke folder bot di Termux dengan command berikut:
+
+```bash
+mv config.json /data/data/com.termux/files/home/XBotBeta
+```
+
+<summary><b>🔑 Summary 2 — Login & Ambil Config</b></summary>
 - jangan langsung buka tapi masuk ke config.json caranya 
 ```bash
 nano config.json
