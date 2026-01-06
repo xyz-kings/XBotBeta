@@ -157,28 +157,6 @@ Setelah dijalankan, pairing Code akan muncul di terminal.
 pairing code muncul dan langsung ke WhatsApp untuk menghubungkan bot Xyz ini.
 
 
----
-
-## Konfigurasi
-
-Edit file config.json untuk menyesuaikan:
-
-• Nomor owner
-
-• Nama bot
-
-° Prefix
-
-• API key (wajib daftar di website kami)  
-  👉 https://xrest-api.vercel.app  
-
-<img src="https://files.catbox.moe/4lz5xl.jpg" width="300" />
-
-Pastikan format JSON benar agar bot tidak error saat dijalankan.
-
-
----
-
 ## Catatan
 
 Jangan menghapus file .json yang digunakan sebagai database.
