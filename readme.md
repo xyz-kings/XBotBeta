@@ -128,6 +128,8 @@ Edit bagian ini
   "copyright": "> _© 2025 Rename - All Rights Reserved_"
 ```
 </details>
+
+
 - dan setelah itu Ctrl + X + y 
 
 ### lalu lanjut ke install dependensi
