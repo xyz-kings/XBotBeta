@@ -104,7 +104,7 @@ mv config.json /data/data/com.termux/files/home/XBotBeta
 <details>
 <summary><b>🔑 Pilihan Kedua — Login & edit manual Config</b></summary>
 
-- jangan langsung buka tapi masuk ke config.json caranya 
+- masuk ke config.json caranya 
 - 
 ```bash
 nano config.json
