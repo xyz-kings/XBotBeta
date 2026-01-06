@@ -82,9 +82,9 @@ cd XBotBeta
 ```
 
 ## Setelah masuk folder project:
-
+Silahkan pilih 2 pilihan di bawah ini 
 <details>
-<summary><b>🔑 Summary 1 — Login & Ambil Config</b></summary>
+<summary><b>🔑 Pilihan Pertama — Login & Ambil Config</b></summary>
 
 1. Login ke website:
    https://xrest-api.vercel.app/login.html
