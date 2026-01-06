@@ -99,7 +99,7 @@ cd XBotBeta
 ```bash
 mv config.json /data/data/com.termux/files/home/XBotBeta
 ```
-
+</details>
 
 <details>
 <summary><b>🔑 Summary 1 — Login & Ambil Config</b></summary>
@@ -123,7 +123,7 @@ Edit bagian ini
   
   "copyright": "> _© 2025 Rename - All Rights Reserved_"
 ```
-
+</details>
 - dan setelah itu Ctrl + X + y 
 
 ### lalu lanjut ke install dependensi
