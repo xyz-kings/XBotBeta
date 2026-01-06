@@ -100,7 +100,8 @@ cd XBotBeta
 mv config.json /data/data/com.termux/files/home/XBotBeta
 ```
 
-<summary><b>🔑 Summary 2 — Login & Ambil Config</b></summary>
+<details>
+<summary><b>🔑 Summary 1 — Login & Ambil Config</b></summary>
 - jangan langsung buka tapi masuk ke config.json caranya 
 ```bash
 nano config.json
