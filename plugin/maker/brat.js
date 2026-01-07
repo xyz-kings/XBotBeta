@@ -35,7 +35,7 @@ module.exports = {
       await reactLoading(bot, m); // otomatis pakai default 🔁🔃🔄
       // === FETCH IMAGE ===
       const api =
-        `https://brat-gamma.vercel.app/api/brat?text=${encodeURIComponent(text)}`;
+        `https://xbrat-whatsapp.vercel.app/brat?text=${encodeURIComponent(text)}`;
 
       const res = await axios.get(api, { responseType: "arraybuffer" });
 
