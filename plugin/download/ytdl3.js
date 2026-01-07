@@ -5,7 +5,7 @@ const config = require("../../config.json");
 const { reactLoading } = require("../../lib/helperAnimasi");
 
 module.exports = {
-    command: ["ytdl4"],
+    command: ["ytdl3"],
 
     async execute(bot, m, args) {
         if (args.length === 0) {
@@ -22,95 +22,158 @@ module.exports = {
         await reactLoading(bot, m);
 
         try {
-            // Ambil info video dulu pake API ytsearch (atau langsung dari ytmp4 kalo ada info)
-            // Tapi API lu cuma ngasih link download doang, jadi gue tambahin API search biar dapet info lengkap
-            // Gunain API lu yang ytsearch kalo ada, atau fallback ke public API
+            // Ambil video ID dari URL
+            const videoId = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/i)?.[1];
             let title = "YouTube Music";
             let channel = "Unknown";
-            let duration = "Unknown";
-            let views = "Unknown";
-            let thumbUrl = "https://i.ytimg.com/vi_default.jpg"; // fallback
+            let thumbUrl = "";
 
-            // Coba ambil ID video
-            const videoId = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/i)?.[1];
+            // Jika ada video ID, dapatkan thumbnail
             if (videoId) {
                 thumbUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-
-                // Optional: ambil info dari API gratis (no key needed)
+                
+                // Coba ambil info video dari API noembed
                 try {
-                    const infoRes = await axios.get(`https://noembed.com/embed?url=${encodeURIComponent(url)}`, { timeout: 10000 });
+                    const infoRes = await axios.get(`https://noembed.com/embed?url=${encodeURIComponent(url)}`, { 
+                        timeout: 10000 
+                    });
                     if (infoRes.data.title) {
                         title = infoRes.data.title;
                         channel = infoRes.data.author_name || channel;
                     }
                 } catch (e) {
-                    // Ignore kalo gagal, lanjut pake default
+                    console.log("Info API gagal, menggunakan default");
                 }
             }
 
-            // Panggil API download lu
+            // Panggil API download
             const apiUrl = `${config.baseURL}/download/ytmp3?apikey=${config.apiKey}&url=${encodeURIComponent(url)}`;
-            const res = await axios.get(apiUrl, { timeout: 20000 });
+            const res = await axios.get(apiUrl, { timeout: 30000 });
 
             if (!res.data.status || !res.data.result) {
                 throw new Error("API gagal atau link tidak support");
             }
 
-            const videoUrl = res.data.result;
+            const audioUrl = res.data.result;
             const creator = res.data.creator || "Xyz-King's";
 
             // Nama file bersih
-            const fileName = `${title.replace(/[^a-zA-Z0-9]/g, '_')}.mp3`.slice(0, 100);
-            if (!fileName.endsWith('.mp3')) fileName += '.mp3';
+            const cleanTitle = title.replace(/[<>:"/\\|?*]/g, '_').slice(0, 100);
+            const fileName = `${cleanTitle}.mp3`;
 
             // Temp folder
             const tempDir = path.join(__dirname, "../../temp");
-            if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
+            if (!fs.existsSync(tempDir)) {
+                fs.mkdirSync(tempDir, { recursive: true });
+            }
 
-            const videoPath = path.join(tempDir, fileName);
-            const thumbPath = path.join(tempDir, "yt_thumb.jpg");
+            const audioPath = path.join(tempDir, fileName);
 
-            // Download video MP4
-            const videoWriter = fs.createWriteStream(videoPath);
-            const videoRes = await axios({
-                url: videoUrl,
+            // Download audio ke file temp
+            const audioResponse = await axios({
+                url: audioUrl,
                 method: "GET",
                 responseType: "stream",
-                timeout: 120000 // 2 menit buat video besar
+                timeout: 120000
             });
-            videoRes.data.pipe(videoWriter);
+
+            const writer = fs.createWriteStream(audioPath);
+            audioResponse.data.pipe(writer);
 
             await new Promise((resolve, reject) => {
-                videoWriter.on("finish", resolve);
-                videoWriter.on("error", reject);
+                writer.on("finish", resolve);
+                writer.on("error", reject);
             });
 
-            // Caption lengkap
-            const caption = `✅ DOWNLOAD MUSIK YOUTUBE BERHASIL!
+            // Download thumbnail jika ada
+            let thumbBuffer = null;
+            if (thumbUrl) {
+                try {
+                    const thumbRes = await axios.get(thumbUrl, {
+                        responseType: "arraybuffer",
+                        timeout: 10000
+                    });
+                    thumbBuffer = Buffer.from(thumbRes.data, 'binary');
+                } catch (e) {
+                    console.log("Gagal download thumbnail:", e.message);
+                }
+            }
 
-⚙️ Powered by: ${creator} API
+            // Buat caption sesuai format yang diminta
+            const caption = `🎵 *YouTube Music Downloader*
 
-${config.copyright}`;
+📌 *Title:* ${title}
+👤 *Channel:* ${channel}
 
-            // Kirim sebagai DOCUMENT + thumbnail
+⚙️ *Powered by:* ${creator} API
+
+> _${config.copyright || "© 2025 Xyz Kings - All Rights Reserved"}_`;
+
+            // Kirim AUDIO dulu
+            const messageOptions = {
+                audio: fs.readFileSync(audioPath),
+                mimetype: 'audio/mpeg',
+                ptt: false,
+                fileName: `${title.substring(0, 50)}.mp3`,
+            };
+
+            // Tambahkan thumbnail jika ada
+            if (thumbBuffer) {
+                messageOptions.jpegThumbnail = thumbBuffer;
+            }
+
+            // Kirim audio
+            const audioMessage = await bot.sendMessage(m.key.remoteJid, messageOptions, { quoted: m });
+            
+            // Tunggu sebentar agar audio terkirim dulu
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // Coba beberapa cara untuk mendapatkan ID pesan audio
+            let audioMessageKey;
+            
+            if (audioMessage && audioMessage.key) {
+                // Jika langsung dapat key dari response
+                audioMessageKey = audioMessage.key;
+            } else if (audioMessage && audioMessage.messageID) {
+                // Jika dapat messageID
+                audioMessageKey = {
+                    remoteJid: m.key.remoteJid,
+                    id: audioMessage.messageID,
+                    fromMe: true
+                };
+            } else {
+                // Buat key manual berdasarkan timestamp
+                audioMessageKey = {
+                    remoteJid: m.key.remoteJid,
+                    id: Date.now().toString(),
+                    fromMe: true,
+                    participant: m.key.participant || m.key.remoteJid
+                };
+            }
+
+            // Kirim caption sebagai reply ke audio
             await bot.sendMessage(m.key.remoteJid, {
-                document: fs.readFileSync(videoPath),
-                mimetype: "audio/mpeg",
-                fileName: fileName,
-                caption: caption,
-                jpegThumbnail: thumbBuffer
-            }, { quoted: m });
+                text: caption,
+                quoted: {
+                    key: audioMessageKey,
+                    message: { audioMessage: {} }
+                }
+            });
 
-            // Cleanup temp
+            // Cleanup: hapus file audio dari temp
             try {
-                fs.unlinkSync(videoPath);
-                if (thumbBuffer) fs.unlinkSync(thumbPath);
-            } catch (e) {}
+                if (fs.existsSync(audioPath)) {
+                    fs.unlinkSync(audioPath);
+                    console.log(`✓ File temp dihapus: ${fileName}`);
+                }
+            } catch (e) {
+                console.log("Gagal menghapus file temp:", e.message);
+            }
 
         } catch (error) {
             console.error("Error ytdl3:", error.message || error);
             bot.sendMessage(m.key.remoteJid, {
-                text: `❌ Gagal download video YouTube!\n\n• ${error.message || "Link tidak support atau error API"}\n• Coba link lain`
+                text: `❌ Gagal download audio YouTube!\n\n• ${error.message || "Link tidak support atau error API"}\n• Coba link lain atau coba lagi nanti`
             }, { quoted: m });
         }
     }
