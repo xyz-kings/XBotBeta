@@ -144,6 +144,16 @@ atau:
 yarn i
 ```
 
+### Opsional Step
+Jika terjadi error saat penginstalan yarn:
+```bash
+yarn config set ignore-engines true
+```
+setelah itu 
+```bash
+yarn add sharp --ignore-platform
+```
+
 ---
 
 ## Menjalankan Bot
