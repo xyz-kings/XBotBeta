@@ -4,8 +4,203 @@ const config = require("./config.json");
 
 // Import Game Manager
 const gameManager = require("./lib/helpergame");
+// Import AFK Handler
+const AFKHandler = require("./lib/afkHandler");
+const afkHandler = new AFKHandler();
+// Import Premium Handler
+const premiumHandler = require("./lib/helperpremium");
 
 require("jimp");
+
+// ===== PENGATURAN IGNORE OLD MESSAGES (FIXED) =====
+let botStartTime = Date.now();
+
+// Fungsi untuk cek apakah pesan diterima SEBELUM bot start
+function isMessageBeforeBotStart(messageTimestamp) {
+    const messageTime = messageTimestamp * 1000;
+    return messageTime < botStartTime;
+}
+
+// Set waktu bot start
+function setBotStartTime() {
+    botStartTime = Date.now();
+}
+// ===== END PENGATURAN IGNORE OLD MESSAGES =====
+
+// ===== TAMPILAN ASCII SAAT START =====
+function displayAsciiArt() {
+    console.clear();
+    
+    const colors = {
+        reset: "\x1b[0m",
+        green: "\x1b[32m",
+        white: "\x1b[37m"
+    };
+
+    const asciiArt = `${colors.green}
+▒██   ██▒▓██   ██▓▒███████▒ ▄▄▄▄    ▒█████  ▄▄▄█████▓  ██████ 
+▒▒ █ █ ▒░ ▒██  ██▒▒ ▒ ▒ ▄▀░▓█████▄ ▒██▒  ██▒▓  ██▒ ▓▒▒██    ▒ 
+░░  █   ░  ▒██ ██░░ ▒ ▄▀▒░ ▒██▒ ▄██▒██░  ██▒▒ ▓██░ ▒░░ ▓██▄   
+ ░ █ █ ▒   ░ ▐██▓░  ▄▀▒   ░▒██░█▀  ▒██   ██▒░ ▓██▓ ░   ▒   ██▒
+▒██▒ ▒██▒  ░ ██▒▓░▒███████▒░▓█  ▀█▓░ ████▓▒░  ▒██▒ ░ ▒██████▒▒
+▒▒ ░ ░▓ ░   ██▒▒▒ ░▒▒ ▓░▒░▒░▒▓███▀▒░ ▒░▒░▒░   ▒ ░░   ▒ ▒▓▒ ▒ ░
+░░   ░▒ ░ ▓██ ░▒░ ░░▒ ▒ ░ ▒▒░▒   ░   ░ ▒ ▒░     ░    ░ ░▒  ░ ░
+ ░    ░   ▒ ▒ ░░  ░ ░ ░ ░ ░ ░    ░ ░ ░ ░ ▒    ░      ░  ░  ░  
+ ░    ░   ░ ░       ░ ░     ░          ░ ░                 ░  
+          ░ ░     ░              ░${colors.reset}
+    `;
+    
+    console.log(asciiArt);
+    console.log(`${colors.green}Welcome To Script By ©XyzKings${colors.reset}`);
+    
+    // Format tanggal
+    const now = new Date();
+    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    
+    const dayName = days[now.getDay()];
+    const date = now.getDate();
+    const month = months[now.getMonth()];
+    const year = now.getFullYear();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    
+    console.log(`${colors.white}${dayName} ${hours}:${minutes}:${seconds} ${date} ${month} ${year}${colors.reset}`);
+    console.log("\n");
+}
+
+// Panggil fungsi displayAsciiArt
+displayAsciiArt();
+// ===== END TAMPILAN ASCII =====
+
+// ===== CUSTOM LOGGER UNTUK FILTER LOG BAILEYS & SESSION =====
+const originalConsoleLog = console.log;
+const originalConsoleError = console.error;
+const originalConsoleWarn = console.warn;
+
+// Daftar kata kunci untuk filter log Baileys yang tidak perlu
+const BAILEYS_LOG_KEYWORDS = [
+    'SessionEntry', 'Closing session:', 'Removing old closed session:', 'registrationId:',
+    'currentRatchet:', 'ephemeralKeyPair:', 'rootKey:', 'indexInfo:', 'pendingPreKey:',
+    '_chains:', '<Buffer', 'chainKey:', 'messageKeys:', 'baseKey:', 'remoteIdentityKey:',
+    'signedKeyId:', 'preKeyId:', 'lastRemoteEphemeralKey:', 'previousCounter:', 'baseKeyType:',
+    'closed:', 'used:', 'created:', 'ws connect', 'ws close', 'ws connection',
+    'connection update', 'qr', 'connection', 'creds updated', 'processing message',
+    'message from', 'sending message', 'sent message', 'receiving messages',
+    'presence update', 'chatstate', 'group update', 'group participants',
+    'received notify', 'stream:', 'baileys', 'socket', 'handshake', 'login', 'user logged in'
+];
+
+// Fungsi untuk menentukan apakah log harus difilter
+function shouldFilterLog(message) {
+    const lowerMessage = message.toLowerCase();
+    
+    if (message.includes('pubKey:') && message.includes('privKey:')) {
+        return true;
+    }
+    
+    if (message.includes('0x') && message.length > 100) {
+        return true;
+    }
+    
+    return BAILEYS_LOG_KEYWORDS.some(keyword => 
+        lowerMessage.includes(keyword.toLowerCase())
+    );
+}
+
+// Override console.log
+console.log = function(...args) {
+    const message = args.join(' ');
+    
+    // Filter log yang tidak diinginkan
+    if (shouldFilterLog(message)) {
+        return;
+    }
+    
+    // Format log agar lebih rapi
+    const timestamp = new Date().toLocaleTimeString();
+    const formattedMessage = `[${timestamp}] ${message}`;
+    
+    originalConsoleLog.call(console, formattedMessage);
+};
+
+// Override console.error
+console.error = function(...args) {
+    const message = args.join(' ');
+    
+    if (shouldFilterLog(message)) {
+        return;
+    }
+    
+    const timestamp = new Date().toLocaleTimeString();
+    const formattedMessage = `[${timestamp}] ❌ ${message}`;
+    
+    originalConsoleError.call(console, formattedMessage);
+};
+
+// Override console.warn
+console.warn = function(...args) {
+    const message = args.join(' ');
+    
+    if (shouldFilterLog(message)) {
+        return;
+    }
+    
+    const timestamp = new Date().toLocaleTimeString();
+    const formattedMessage = `[${timestamp}] ⚠️ ${message}`;
+    
+    originalConsoleWarn.call(console, formattedMessage);
+};
+
+// Clean log untuk pesan koneksi awal
+console.info = function(...args) {
+    const message = args.join(' ');
+    const timestamp = new Date().toLocaleTimeString();
+    
+    if (message.includes('Bot connected') || 
+        message.includes('Connected to') || 
+        message.includes('Initializing') ||
+        message.includes('ready')) {
+        const formattedMessage = `[${timestamp}] ✅ ${message}`;
+        originalConsoleLog.call(console, formattedMessage);
+    }
+};
+// ===== END CUSTOM LOGGER =====
+
+// ===== TYPING EFFECT SYSTEM =====
+let typingEffectEnabled = config.sedangmengetik !== undefined ? config.sedangmengetik : true;
+
+async function sendWithTypingEffect(bot, chatId, userId, sendFunction, minDelay = 1000, maxDelay = 3000) {
+    if (!typingEffectEnabled) {
+        return sendFunction();
+    }
+    
+    try {
+        await bot.sendPresenceUpdate('composing', chatId);
+        
+        const typingTime = Math.random() * (maxDelay - minDelay) + minDelay;
+        await new Promise(resolve => setTimeout(resolve, typingTime));
+        
+        await bot.sendPresenceUpdate('paused', chatId);
+        
+        await new Promise(resolve => setTimeout(resolve, 200));
+        
+        return await sendFunction();
+    } catch (error) {
+        console.error('Error pada efek mengetik:', error);
+        return sendFunction();
+    }
+}
+
+async function sendMessageWithTyping(bot, chatId, content, m, options = {}) {
+    const userId = m.key.participant || m.key.remoteJid;
+    
+    return sendWithTypingEffect(bot, chatId, userId, async () => {
+        return bot.sendMessage(chatId, content, { quoted: m });
+    }, options.minDelay, options.maxDelay);
+}
+// ===== END TYPING EFFECT SYSTEM =====
 
 const plugins = new Map();
 let loaded = false;
@@ -16,11 +211,13 @@ let autoRead = config.autoRead !== undefined ? config.autoRead : true;
 
 // Variables untuk cleanup periodik
 let cleanupInterval = null;
-const CLEANUP_INTERVAL_MINUTES = 30; // Setiap 30 menit
-const GAME_EXPIRY_MINUTES = 60; // Game dianggap expired setelah 60 menit
+const CLEANUP_INTERVAL_MINUTES = 30;
+const GAME_EXPIRY_MINUTES = 60;
 
 function loadPlugins() {
     if (loaded) return;
+    
+    // ===== LOAD REGULAR PLUGINS =====
     const pluginDir = path.join(__dirname, "plugin");
     if (!fs.existsSync(pluginDir)) fs.mkdirSync(pluginDir, { recursive: true });
 
@@ -36,71 +233,389 @@ function loadPlugins() {
                 delete require.cache[require.resolve(path.join(catPath, file))];
                 const command = require(path.join(catPath, file));
                 if (typeof command === "object" && command.command) {
+                    command._sendWithTyping = async function(content, options = {}) {
+                        return sendMessageWithTyping(bot, m.key.remoteJid, content, m, options);
+                    };
+                    
                     plugins.get(category.toLowerCase()).push(command);
                     
-                    // Register game handlers to Game Manager
                     if (category.toLowerCase() === 'game' && command.gameType) {
                         gameManager.registerGameHandler(command.gameType, command);
-                        console.log(`[HANDLER] Registered game handler: ${command.gameType}`);
                     }
                 }
             } catch (e) {
-                console.error(`Error loading plugin ${category}/${file}:`, e);
+                console.error(`❌ Error loading plugin ${category}/${file}:`, e);
             }
         }
     }
+    
+    // ===== LOAD PREMIUM PLUGINS (TERPISAH) =====
+    const premiumDir = path.join(__dirname, "premium");
+    if (fs.existsSync(premiumDir)) {
+        const premiumCategories = fs.readdirSync(premiumDir).filter(f => 
+            fs.statSync(path.join(premiumDir, f)).isDirectory()
+        );
+        
+        for (const category of premiumCategories) {
+            const catPath = path.join(premiumDir, category);
+            const files = fs.readdirSync(catPath).filter(f => f.endsWith(".js"));
+            
+            // Tambahkan ke plugins map dengan prefix "premium_"
+            const pluginCategory = `premium_${category.toLowerCase()}`;
+            plugins.set(pluginCategory, []);
+            
+            for (const file of files) {
+                try {
+                    delete require.cache[require.resolve(path.join(catPath, file))];
+                    const command = require(path.join(catPath, file));
+                    if (typeof command === "object" && command.command) {
+                        command._sendWithTyping = async function(content, options = {}) {
+                            return sendMessageWithTyping(bot, m.key.remoteJid, content, m, options);
+                        };
+                        
+                        // Tandai sebagai premium
+                        command.premiumOnly = true;
+                        command.category = pluginCategory;
+                        
+                        plugins.get(pluginCategory).push(command);
+                        console.log(`💎 Loaded premium: ${category}/${file}`);
+                    }
+                } catch (e) {
+                    console.error(`❌ Error loading premium plugin ${category}/${file}:`, e);
+                }
+            }
+        }
+    }
+    
     loaded = true;
-    console.log("Plugins loaded:", Array.from(plugins.keys()));
+    
+    // Log summary
+    const allCategories = Array.from(plugins.keys()).filter(cat => !cat.startsWith('premium_'));
+    const premiumCategories = Array.from(plugins.keys()).filter(cat => cat.startsWith('premium_'));
+    
+    console.log(`📦 Plugin dimuat: ${allCategories.join(', ')}`);
+    if (premiumCategories.length > 0) {
+        console.log(`💎 Premium plugins: ${premiumCategories.length} categories`);
+        // Hitung total premium commands
+        let totalPremiumCmds = 0;
+        for (const cat of premiumCategories) {
+            totalPremiumCmds += plugins.get(cat).length;
+        }
+        console.log(`💎 Total premium commands: ${totalPremiumCmds}`);
+    }
+}
+
+// Fungsi untuk mendapatkan waktu berdasarkan jam
+function getGreetingTime() {
+    const hour = new Date().getHours();
+    
+    if (hour >= 4 && hour < 10) return 'pagi';
+    if (hour >= 10 && hour < 15) return 'siang';
+    if (hour >= 15 && hour < 18) return 'sore';
+    if (hour >= 18 && hour < 24) return 'malam';
+    return 'subuh';
+}
+
+// Fungsi untuk mendapatkan runtime bot
+function getRuntime(startTime) {
+    const now = Date.now();
+    const diff = now - startTime;
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    
+    if (days > 0) {
+        return `${days} hari ${hours} jam`;
+    } else if (hours > 0) {
+        return `${hours} jam ${minutes} menit`;
+    } else {
+        return `${minutes} menit`;
+    }
+}
+
+// Bot global start time (untuk menu)
+const botStartTimeGlobal = Date.now();
+
+// ===== FUNGSI UNTUK MENDAPATKAN ROLE USER =====
+async function getUserRole(userId, isOwner = false) {
+    return premiumHandler.getRole(userId, isOwner);
+}
+// ===== END FUNGSI ROLE =====
+
+// ===== FUNGSI UNTUK MENAMPILKAN PREMIUM MENU =====
+async function sendPremiumMenu(bot, m, showAll = false) {
+    const userId = m.key.participant || m.key.remoteJid;
+    const isOwner = m.key.fromMe || (config.ownerNumber && config.ownerNumber.includes(userId));
+    
+    // Cek premium status
+    const premiumStatus = premiumHandler.isPremium(userId, m);
+    
+    // Jika bukan premium/owner dan mau lihat premium menu
+    if (!premiumStatus.isPremium && !premiumStatus.isOwner && !premiumStatus.isBot) {
+        const errorMsg = `❌ *PREMIUM MENU LOCKED!*\n\n` +
+                        `Fitur premium hanya untuk user premium.\n\n` +
+                        `💎 *Upgrade ke Premium:*\n` +
+                        `Gunakan: .xbuy status <hari>\n` +
+                        `1 hari = 5 XCoin\n\n` +
+                        `💰 *Cek XCoin:* .myxcoin\n\n` +
+                        `👑 *Owner/Bot:* Selalu premium`;
+        
+        return bot.sendMessage(m.key.remoteJid, { 
+            text: errorMsg 
+        }, { quoted: m });
+    }
+    
+    // Get premium categories dari plugins map
+    const premiumCategories = Array.from(plugins.keys())
+        .filter(cat => cat.startsWith('premium_'))
+        .map(cat => cat.replace('premium_', ''));
+    
+    let text = `          「 𝙿𝚁𝙴𝙼𝙸𝚄𝙼 𝙼𝙴𝙽𝚄 」\n\n`;
+    
+    if (showAll) {
+        text += `📋 *ALL PREMIUM COMMANDS*\n\n`;
+        
+        if (premiumCategories.length === 0) {
+            text += `📭 *Belum ada fitur premium*\n`;
+            text += `💡 Fitur premium akan ditambahkan segera!\n\n`;
+        }
+        
+        // Tampilkan semua command premium
+        for (const category of premiumCategories) {
+            const categoryKey = `premium_${category}`;
+            const pluginsList = plugins.get(categoryKey) || [];
+            if (pluginsList.length === 0) continue;
+            
+            const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
+            text += `╔━━━━━━━━「 *${categoryName.toUpperCase()}* 」━━━━━━━❒\n`;
+            
+            for (const plugin of pluginsList) {
+                const cmdName = Array.isArray(plugin.command) ? plugin.command[0] : plugin.command;
+                text += `│${config.prefix}${cmdName}\n`;
+            }
+            
+            text += `╚═════════════════ꪶ ཻུ۪۪ꦽꦼ̷\n\n`;
+        }
+        
+    } else {
+        text += `📁 *PREMIUM CATEGORIES*\n\n`;
+        
+        if (premiumCategories.length === 0) {
+            text += `📭 *Belum ada kategori premium*\n`;
+            text += `💡 Fitur premium akan ditambahkan segera!\n\n`;
+        }
+        
+        // Tampilkan kategori premium
+        text += `╔━━━━━━━━「 *𝙼𝙴𝙽𝚄 𝙿𝚁𝙴𝙼𝙸𝚄𝙼 * 」━━━━━━━❒\n`;
+        for (const category of premiumCategories) {
+            const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
+            text += `│${config.prefix}prem_${category}\n`;
+        }
+        text += `╚═════════════════ꪶ ཻུ۪۪ꦽꦼ̷\n\n`;
+        
+        text += `📌 *Info:*\n`;
+        text += `• Gunakan .prem_<kategori> untuk lihat fitur\n`;
+        text += `• Gunakan .prem_allmenu untuk lihat semua\n`;
+        text += `• Status kamu: ${premiumStatus.isPremium ? 'Premium ✅' : 'Free ❌'}\n\n`;
+    }
+    
+    text += `👑 *Premium Status:*\n`;
+    if (premiumStatus.isBot) {
+        text += `• Bot: VVIP + Dark VVIP\n`;
+    } else if (premiumStatus.isOwner) {
+        text += `• Owner: VVIP + Dark VVIP\n`;
+    } else if (premiumStatus.isPremium) {
+        const days = premiumStatus.daysLeft || 0;
+        const hours = premiumStatus.hoursLeft || 0;
+        const minutes = premiumStatus.minutesLeft || 0;
+        text += `• Dark VVIP: ${days}d ${hours}h ${minutes}m\n`;
+    }
+    
+    text += `\n${config.copyright || ''}`;
+    
+    await sendWithTypingEffect(bot, m.key.remoteJid, userId, async () => {
+        return bot.sendMessage(m.key.remoteJid, { text }, { quoted: m });
+    });
+}
+
+// Fungsi untuk menampilkan submenu premium
+async function sendPremiumSubMenu(bot, m, category) {
+    const userId = m.key.participant || m.key.remoteJid;
+    
+    // Cek premium status
+    const premiumStatus = premiumHandler.isPremium(userId, m);
+    if (!premiumStatus.isPremium && !premiumStatus.isOwner && !premiumStatus.isBot) {
+        const errorMsg = `❌ *PREMIUM FEATURE LOCKED!*\n\n` +
+                        `Fitur ini hanya untuk user premium.\n\n` +
+                        `💎 *Upgrade ke Premium:*\n` +
+                        `.xbuy status <hari>`;
+        
+        return bot.sendMessage(m.key.remoteJid, { 
+            text: errorMsg 
+        }, { quoted: m });
+    }
+    
+    const categoryKey = `premium_${category.toLowerCase()}`;
+    const pluginsList = plugins.get(categoryKey) || [];
+    
+    if (pluginsList.length === 0) {
+        return bot.sendMessage(m.key.remoteJid, { 
+            text: `❌ Kategori premium "${category}" tidak ditemukan atau kosong.\n\n` +
+                  `💡 Gunakan .prem_menu untuk melihat kategori yang tersedia.` 
+        }, { quoted: m });
+    }
+    
+    const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
+    let text = `╔━━━━━━━━「 *${categoryName.toUpperCase()}* 」━━━━━━━❒\n`;
+    
+    for (const plugin of pluginsList) {
+        const cmdName = Array.isArray(plugin.command) ? plugin.command[0] : plugin.command;
+        text += `│${config.prefix}${cmdName}\n`;
+    }
+    
+    text += `╚═════════════════ꪶ ཻུ۪۪ꦽꦼ̷\n\n`;
+    text += `👑 Status: ${premiumStatus.isPremium ? 'Premium ✅' : 'Free ❌'}\n`;
+    text += `📌 Gunakan .prem_menu untuk kembali\n`;
+    text += `📌 Total fitur: ${pluginsList.length}`;
+    
+    await sendWithTypingEffect(bot, m.key.remoteJid, userId, async () => {
+        return bot.sendMessage(m.key.remoteJid, { text }, { quoted: m });
+    });
+}
+// ===== END FUNGSI PREMIUM MENU =====
+
+// ===== CUSTOM LOGGING SYSTEM =====
+function logMessage(message, m = null) {
+    const timestamp = new Date().toLocaleTimeString();
+    let formattedMessage = `[${timestamp}] ${message}`;
+    
+    if (m && m.key) {
+        const isFromBot = m.key.fromMe;
+        const userId = m.key.participant || m.key.remoteJid;
+        const pushname = m.pushName || "Unknown";
+        
+        if (isFromBot) {
+            formattedMessage = `[${timestamp}] 🤖 BOT: ${message}`;
+        } else {
+            const shortId = userId.replace(/[^0-9]/g, '').slice(-6);
+            formattedMessage = `[${timestamp}] 👤 ${pushname} (${shortId}): ${message}`;
+        }
+    }
+    
+    originalConsoleLog.call(console, formattedMessage);
 }
 
 async function sendMainMenu(bot, m) {
-    const isOwner = m.key.fromMe || (config.ownerNumber && config.ownerNumber.includes(m.key.participant || m.key.remoteJid));
+    const userId = m.key.participant || m.key.remoteJid;
+    const isOwner = m.key.fromMe || (config.ownerNumber && config.ownerNumber.includes(userId));
     
-    let text = `${config.menuCaption}\n\n          「 𝙼𝙴𝙽𝚄 𝚄𝚃𝙰𝙼𝙰 」\n\n`;
+    const pushname = m.pushName || "Pengguna";
+    const greetingTime = getGreetingTime();
     
-    text += `📊 *STATUS BOT*\n`;
-    text += `├ Mode: ${botMode === "self" ? "Self Mode" : "Public Mode"}\n`;
-    text += `├ Auto Read: ${autoRead ? "ON" : "OFF"}\n`;
-    text += `└ Active Games: ${gameManager.activeGames.size}\n\n`;
+    // Dapatkan role user dari premium handler
+    const userRole = await getUserRole(userId, isOwner);
     
-    const categories = Array.from(plugins.keys()).sort();
+    // Waktu respon
+    const responseTime = Date.now() - (m.messageTimestamp * 1000);
+    
+    // ===== BAGIAN ATAS MENU =====
+    let text = `          「 𝙼𝙴𝙽𝚄 𝚄𝚃𝙰𝙼𝙰 」\n`;
+    text += `ʜᴀʟᴏ ᴋᴀᴋ *${pushname}* sᴇʟᴀᴍᴀᴛ ${greetingTime}\n\n`;
+    
+    text += `╔═━━━━『 \`ɪɴғᴏ ᴜsᴇʀ\` 』━━━━━❍\n`;
+    text += `╠═ [ ɴᴀᴍᴀ : ${pushname}\n`;
+    text += `╠═ [ ʀᴏʟᴇ : ${userRole}\n`;
+    text += `╠═ [ ᴍᴏᴅᴇ : ${botMode === "self" ? "self" : "public"}\n`;
+    text += `╠═ [ ᴀᴜᴛʜᴏʀ : ${config.author || "Unknown"}\n`;
+    text += `╚═━━━━━━━━━━━━━━━━━〣ꪶ ཻུ۪۪ꦽꦼ̷\n\n`;
+    
+    text += `╔═━━━━『 \`ɪɴғᴏ ʙᴏᴛ\` 』━━━━━❍\n`;
+    text += ` > ⎆ ʀᴜɴᴛɪᴍᴇ : ${getRuntime(botStartTimeGlobal)}\n`;
+    text += ` > ⎆ ᴠᴇʀsɪ : ${config.version || "1.0.0"}\n`;
+    text += ` > ⎆ ʀᴇsᴘᴏɴ : ${responseTime}ms\n`;
+    text += `╚═━━━━━━━━━━━━━━━━━〣ꪶ ཻུ۪۪ꦽꦼ̷\n\n`;
+    
+    text += `*_Bot hanya merespon pesan yang diterima SETELAH bot aktif_*\n\n`;
+    
+    text += `> *ᴍᴏʜᴏɴ ᴜɴᴛᴜᴋ ᴍᴇᴍʙᴀᴄᴀ ʀᴜʟᴇs ʙᴏᴛ ʙɪᴀʀ ᴛᴇʀʜɪɴᴅᴀʀ ᴅᴀʀɪ ᴋᴇɴᴏɴ*\n`;
+    text += `> *ᴋɴᴘ ʙᴀɴɢ?, ʜᴇʏ ɢᴡ ᴋᴀsɪʜ ᴛᴀᴜ ʏᴀ ʟᴜ sᴘᴀᴍ ɪᴛᴜ ʙɪᴋɪɴ ʙᴏᴛ ɴʏᴇᴘᴀᴍ*\n\n`;
+    
+    text += `ᴍᴏʜᴏɴ ᴜɴᴛᴜᴋ ᴘᴇɴɢᴇʀᴛɪᴀɴʏᴀ ᴀɢᴀʀ ɴᴏᴍᴇʀ ʙᴏᴛ ᴛɪᴅᴀᴋ ᴋᴇɴᴏɴ\n\n`;
+    
+    text += `*ᴋᴀʟᴀᴜ ᴀᴅᴀ ғɪᴛᴜʀ ʙᴜɢ ᴀᴛᴀᴜ ᴇʀʀᴏʀ ᴋᴏɴᴛᴀᴋ ᴏɴᴡᴇʀ ʏᴀ*\n\n`;
+    
+    text += `*🎮 XCOIN EXCHANGE*\n`;
+    text += `Gunakan ${config.prefix}xbuy status <hari> untuk upgrade ke Dark VVIP!\n`;
+    text += `1 hari = 5 XCoin\n\n`;
+    
+    // ===== LIST MENU =====
     text += `╔━━━━━━━━「 *LIST MENU* 」━━━━━━━❒\n`;
+    const categories = Array.from(plugins.keys())
+        .filter(cat => !cat.startsWith('premium_'))
+        .sort();
+    
     for (const cat of categories) {
         text += `│Ketik: ${config.prefix}menu_${cat}\n`;
     }
+    
+    // Tambahkan menu premium jika user premium
+    const premiumStatus = premiumHandler.isPremium(userId, m);
+    if (premiumStatus.isPremium || premiumStatus.isOwner || premiumStatus.isBot) {
+        const premiumCategories = Array.from(plugins.keys())
+            .filter(cat => cat.startsWith('premium_'))
+            .map(cat => cat.replace('premium_', ''));
+        
+        if (premiumCategories.length > 0) {
+            text += `│\n│💎 *PREMIUM MENU:*\n`;
+            text += `│${config.prefix}prem_menu - Menu premium\n`;
+            text += `│${config.prefix}prem_allmenu - Semua fitur premium\n`;
+        }
+    }
+    
     text += `╚═════════════════ꪶ ཻུ۪۪ꦽꦼ̷\n\n`;
     
+    // ===== OWNER MENU =====
     if (isOwner) {
         text += `👑 *OWNER MENU*\n`;
         text += `├ ${config.prefix}self - Mode hanya owner\n`;
         text += `├ ${config.prefix}public - Mode publik\n`;
         text += `├ ${config.prefix}autoread on/off\n`;
+        text += `├ ${config.prefix}effectketik on/off\n`;
         text += `├ ${config.prefix}stopgame - Stop semua game\n`;
         text += `├ ${config.prefix}cleanupgames - Bersihkan game expired\n`;
         text += `└ ${config.prefix}hidenfeatures - Lihat semua fitur tersembunyi\n\n`;
     }
     
-    text += config.copyright;
-    await bot.sendMessage(m.key.remoteJid, { text }, { quoted: m });
+    text += config.copyright || '';
+    
+    await sendWithTypingEffect(bot, m.key.remoteJid, userId, async () => {
+        return bot.sendMessage(m.key.remoteJid, { text }, { quoted: m });
+    });
 }
 
 async function sendAllMenu(bot, m, showHidden = false) {
     const isOwner = m.key.fromMe || (config.ownerNumber && config.ownerNumber.includes(m.key.participant || m.key.remoteJid));
     
-    let text = `${config.allmenuCaption}\n\n          「 𝙰𝙻𝙻 𝙼𝙴𝙽𝚄 」\n\n`;
+    let text = `${config.allmenuCaption || ''}\n\n          「 𝙰𝙻𝙻 𝙼𝙴𝙽𝚄 」\n\n`;
 
     if (isOwner) {
         text += `╔━━━━━━━━「 *OWNER COMMANDS* 」━━━━━━━❒\n`;
         text += `│${config.prefix}self - Mode hanya owner\n`;
         text += `│${config.prefix}public - Mode publik\n`;
         text += `│${config.prefix}autoread on/off\n`;
+        text += `│${config.prefix}effectketik on/off\n`;
         text += `│${config.prefix}stopgame - Stop semua game\n`;
         text += `│${config.prefix}cleanupgames - Bersihkan game expired\n`;
         text += `│${config.prefix}hidenfeatures - Lihat semua fitur tersembunyi\n`;
         text += `╚═════════════════ꪶ ཻུ۪۪ꦽꦼ̷\n\n`;
     }
 
-    const categories = Array.from(plugins.keys()).sort();
+    // Regular plugins
+    const categories = Array.from(plugins.keys())
+        .filter(cat => !cat.startsWith('premium_'))
+        .sort();
+    
     for (const cat of categories) {
         const title = cat.toUpperCase();
         const cmds = plugins.get(cat);
@@ -115,21 +630,55 @@ async function sendAllMenu(bot, m, showHidden = false) {
                 const cmdName = Array.isArray(cmd.command) ? cmd.command[0] : cmd.command;
                 if (cmd.hidden && !showHidden) continue;
                 
-                text += `│${config.prefix}${cmdName}`;
-                
-                if (showHidden && cmd.hidden) {
-                    text += ` 👻`;
-                }
-                text += `\n`;
+                text += `│${config.prefix}${cmdName}\n`;
             }
         }
         text += `╚═════════════════ꪶ ཻུ۪۪ꦽꦼ̷\n\n`;
     }
 
-    text += `\nKetik ${config.prefix}menu untuk kembali ke menu utama\n\n`;
-    text += config.copyright;
+    // ===== PREMIUM MENU SECTION =====
+    const userId = m.key.participant || m.key.remoteJid;
+    const premiumStatus = premiumHandler.isPremium(userId, m);
+    const premiumCategories = Array.from(plugins.keys())
+        .filter(cat => cat.startsWith('premium_'))
+        .map(cat => cat.replace('premium_', ''));
+    
+    if ((premiumStatus.isPremium || premiumStatus.isOwner || premiumStatus.isBot) && premiumCategories.length > 0) {
+        text += `          「 𝙿𝚁𝙴𝙼𝙸𝚄𝙼 𝙼𝙴𝙽𝚄 」\n\n`;
+        
+        for (const category of premiumCategories) {
+            const categoryKey = `premium_${category}`;
+            const pluginsList = plugins.get(categoryKey) || [];
+            if (pluginsList.length === 0) continue;
+            
+            const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
+            text += `╔━━━━━━━━「 *${categoryName.toUpperCase()}* 」━━━━━━━❒\n`;
+            
+            const visiblePlugins = showHidden ? pluginsList : pluginsList.filter(p => !p.hidden);
+            
+            for (const plugin of visiblePlugins) {
+                if (plugin.command) {
+                    const cmdName = Array.isArray(plugin.command) ? plugin.command[0] : plugin.command;
+                    if (plugin.hidden && !showHidden) continue;
+                    
+                    text += `│${config.prefix}${cmdName}\n`;
+                }
+            }
+            text += `╚═════════════════ꪶ ཻུ۪۪ꦽꦼ̷\n\n`;
+        }
+        
+        text += `📌 *Premium Commands:*\n`;
+        text += `├ ${config.prefix}prem_menu - Menu premium\n`;
+        text += `├ ${config.prefix}prem_allmenu - Semua fitur\n`;
+        text += `└ Status: ${premiumStatus.isPremium ? 'Premium ✅' : 'Owner ✅'}\n\n`;
+    }
 
-    await bot.sendMessage(m.key.remoteJid, { text }, { quoted: m });
+    text += `\nKetik ${config.prefix}menu untuk kembali ke menu utama\n\n`;
+    text += config.copyright || '';
+
+    await sendWithTypingEffect(bot, m.key.remoteJid, m.key.participant || m.key.remoteJid, async () => {
+        return bot.sendMessage(m.key.remoteJid, { text }, { quoted: m });
+    });
 }
 
 async function showHiddenFeatures(bot, m) {
@@ -140,7 +689,9 @@ async function showHiddenFeatures(bot, m) {
     
     let hiddenPlugins = [];
     let totalHiddenPlugins = 0;
-    const categories = Array.from(plugins.keys()).sort();
+    const categories = Array.from(plugins.keys())
+        .filter(cat => !cat.startsWith('premium_'))
+        .sort();
     
     for (const cat of categories) {
         const cmds = plugins.get(cat);
@@ -149,6 +700,23 @@ async function showHiddenFeatures(bot, m) {
                 const cmdNames = Array.isArray(cmd.command) ? cmd.command : [cmd.command];
                 for (const cmdName of cmdNames) {
                     hiddenPlugins.push(`${config.prefix}${cmdName}`);
+                    totalHiddenPlugins++;
+                }
+            }
+        }
+    }
+    
+    // Tambahkan premium hidden plugins
+    const premiumCategories = Array.from(plugins.keys())
+        .filter(cat => cat.startsWith('premium_'));
+    
+    for (const category of premiumCategories) {
+        const pluginsList = plugins.get(category);
+        for (const plugin of pluginsList) {
+            if (plugin.hidden === true && plugin.command) {
+                const cmdNames = Array.isArray(plugin.command) ? plugin.command : [plugin.command];
+                for (const cmdName of cmdNames) {
+                    hiddenPlugins.push(`${config.prefix}${cmdName} 💎`);
                     totalHiddenPlugins++;
                 }
             }
@@ -173,14 +741,22 @@ async function showHiddenFeatures(bot, m) {
         totalAllCommands += plugins.get(cat).length;
     }
     
-    const handlerCommandsCount = 2 + categories.length + (isOwner ? 5 : 0) + 1;
+    // Hitung premium plugins
+    let totalPremiumPlugins = 0;
+    for (const category of premiumCategories) {
+        totalPremiumPlugins += plugins.get(category).length;
+    }
+    
+    const handlerCommandsCount = 2 + categories.length + (isOwner ? 6 : 0) + 1;
     
     text += `📊 *STATISTIK*\n`;
     text += `├ Total semua commands: ${totalAllCommands}\n`;
-    text += `├ Handler commands: ${handlerCommandsCount}\n`;
+    text += `├ Premium commands: ${totalPremiumPlugins}\n`;
     text += `├ Hidden plugins: ${totalHiddenPlugins}\n`;
     text += `├ Total kategori: ${categories.length}\n`;
+    text += `├ Premium kategori: ${premiumCategories.length}\n`;
     text += `├ Active Games: ${gameManager.activeGames.size}\n`;
+    text += `├ Typing Effect: ${typingEffectEnabled ? "ON" : "OFF"}\n`;
     text += `└ Cleanup Interval: ${CLEANUP_INTERVAL_MINUTES} menit\n\n`;
     
     if (isOwner) {
@@ -190,18 +766,21 @@ async function showHiddenFeatures(bot, m) {
         text += `• Owner bisa lihat semua via .allmenu\n`;
         text += `• Game Manager v1.0 aktif\n`;
         text += `• Cleanup otomatis setiap ${CLEANUP_INTERVAL_MINUTES} menit\n`;
+        text += `• Effect ketik: ${typingEffectEnabled ? 'AKTIF' : 'NONAKTIF'}\n`;
     }
     
-    text += `\n${config.copyright}`;
+    text += `\n${config.copyright || ''}`;
     
-    await bot.sendMessage(m.key.remoteJid, { text }, { quoted: m });
+    await sendWithTypingEffect(bot, m.key.remoteJid, m.key.participant || m.key.remoteJid, async () => {
+        return bot.sendMessage(m.key.remoteJid, { text }, { quoted: m });
+    });
 }
 
 async function sendSubMenu(bot, m, category) {
     const lowerCat = category.toLowerCase();
     const cmds = plugins.get(lowerCat);
     if (!cmds || cmds.length === 0) {
-        return bot.sendMessage(m.key.remoteJid, { text: "Kategori tidak ditemukan atau kosong!" }, { quoted: m });
+        return;
     }
 
     const title = category.toUpperCase();
@@ -216,39 +795,32 @@ async function sendSubMenu(bot, m, category) {
     text += `╚═════════════════ꪶ ཻུ۪۪ꦽꦼ̷\n\n`;
     text += `Ketik ${config.prefix}menu untuk kembali ke menu utama`;
 
-    await bot.sendMessage(m.key.remoteJid, { text }, { quoted: m });
+    await sendWithTypingEffect(bot, m.key.remoteJid, m.key.participant || m.key.remoteJid, async () => {
+        return bot.sendMessage(m.key.remoteJid, { text }, { quoted: m });
+    });
 }
 
 // ===== FUNGSI CLEANUP PERIODIK =====
 async function performCleanup() {
     try {
-        console.log(`[CLEANUP] Starting periodic cleanup...`);
         const startTime = Date.now();
         
-        // Bersihkan game expired dari file
         const cleanedCount = await gameManager.cleanupExpiredGames(GAME_EXPIRY_MINUTES);
-        
-        // Bersihkan timeout yang sudah expired
-        let timeoutCleaned = 0;
-        const now = Date.now();
-        
-        // Note: GameManager sudah punya cleanup expired games
-        // Ini hanya untuk logging
         
         const endTime = Date.now();
         const duration = endTime - startTime;
         
-        console.log(`[CLEANUP] Completed in ${duration}ms`);
-        console.log(`[CLEANUP] Games cleaned from file: ${cleanedCount}`);
+        if (cleanedCount > 0) {
+            console.log(`🧹 Cleanup selesai: ${cleanedCount} game expired dibersihkan (${duration}ms)`);
+        }
         
         return {
             success: true,
             gamesCleaned: cleanedCount,
-            timeoutsCleaned: timeoutCleaned,
             duration: duration
         };
     } catch (error) {
-        console.error(`[CLEANUP] Error during cleanup:`, error);
+        console.error('❌ Error saat cleanup:', error);
         return {
             success: false,
             error: error.message
@@ -267,15 +839,15 @@ function startCleanupInterval() {
     cleanupInterval = setInterval(async () => {
         try {
             const result = await performCleanup();
-            if (result.success && (result.gamesCleaned > 0 || result.timeoutsCleaned > 0)) {
-                console.log(`[CLEANUP AUTO] Cleaned ${result.gamesCleaned} expired games`);
+            if (result.success && result.gamesCleaned > 0) {
+                console.log(`🧹 [AUTO CLEANUP] ${result.gamesCleaned} game expired dibersihkan`);
             }
         } catch (error) {
-            console.error(`[CLEANUP AUTO] Error:`, error);
+            console.error(`❌ [AUTO CLEANUP] Error:`, error);
         }
     }, intervalMs);
     
-    console.log(`[CLEANUP] Periodic cleanup started (every ${CLEANUP_INTERVAL_MINUTES} minutes)`);
+    console.log(`🔧 Cleanup periodik dimulai (setiap ${CLEANUP_INTERVAL_MINUTES} menit)`);
 }
 
 // Stop cleanup interval
@@ -283,89 +855,112 @@ function stopCleanupInterval() {
     if (cleanupInterval) {
         clearInterval(cleanupInterval);
         cleanupInterval = null;
-        console.log(`[CLEANUP] Periodic cleanup stopped`);
+        console.log(`🔧 Cleanup periodik dihentikan`);
     }
 }
 
 // Manual cleanup command
-async function handleCleanupGames(bot, chatId) {
+async function handleCleanupGames(bot, m) {
+    const chatId = m.key.remoteJid;
     try {
-        await bot.sendMessage(chatId, { 
-            text: `🔄 *Memulai cleanup manual...*\nMembersihkan game yang sudah expired...` 
+        await sendWithTypingEffect(bot, chatId, m.key.participant || chatId, async () => {
+            return bot.sendMessage(chatId, { 
+                text: `🔄 *Memulai cleanup manual...*\nMembersihkan game yang sudah expired...` 
+            }, { quoted: m });
         });
         
         const result = await performCleanup();
         
         if (result.success) {
-            await bot.sendMessage(chatId, { 
-                text: `✅ *Cleanup selesai!*\n\n` +
-                      `📊 **Hasil:**\n` +
-                      `• Game dibersihkan: ${result.gamesCleaned}\n` +
-                      `• Durasi: ${result.duration}ms\n` +
-                      `• Status: Berhasil\n\n` +
-                      `Cleanup otomatis berjalan setiap ${CLEANUP_INTERVAL_MINUTES} menit.`
-            });
-        } else {
-            await bot.sendMessage(chatId, { 
-                text: `❌ *Cleanup gagal!*\nError: ${result.error}` 
+            await sendWithTypingEffect(bot, chatId, m.key.participant || chatId, async () => {
+                return bot.sendMessage(chatId, { 
+                    text: `✅ *Cleanup selesai!*\n\n` +
+                          `📊 **Hasil:**\n` +
+                          `• Game dibersihkan: ${result.gamesCleaned}\n` +
+                          `• Durasi: ${result.duration}ms\n` +
+                          `• Status: Berhasil\n\n` +
+                          `Cleanup otomatis berjalan setiap ${CLEANUP_INTERVAL_MINUTES} menit.`
+                }, { quoted: m });
             });
         }
     } catch (error) {
-        console.error(`[CLEANUP MANUAL] Error:`, error);
-        await bot.sendMessage(chatId, { 
-            text: `❌ *Error saat cleanup!*\n${error.message}` 
-        });
+        console.error(`❌ [CLEANUP MANUAL] Error:`, error);
     }
 }
 
 async function handleOwnerCommands(bot, m, command, args) {
     const isOwner = m.key.fromMe || (config.ownerNumber && config.ownerNumber.includes(m.key.participant || m.key.remoteJid));
-    if (!isOwner) return false;
-    
     const chatId = m.key.remoteJid;
     
     switch(command) {
         case 'self':
+            if (!isOwner) return true;
             botMode = "self";
-            await bot.sendMessage(chatId, { 
-                text: "✅ Bot mode diubah ke *Self Mode*\nHanya owner yang bisa menggunakan bot" 
-            }, { quoted: m });
+            await sendWithTypingEffect(bot, chatId, m.key.participant || chatId, async () => {
+                return bot.sendMessage(chatId, { 
+                    text: "✅ Bot mode diubah ke *Self Mode*\nHanya owner yang bisa menggunakan bot" 
+                }, { quoted: m });
+            });
             return true;
             
         case 'public':
+            if (!isOwner) return true;
             botMode = "public";
-            await bot.sendMessage(chatId, { 
-                text: "✅ Bot mode diubah ke *Public Mode*\nSemua orang bisa menggunakan bot" 
-            }, { quoted: m });
+            await sendWithTypingEffect(bot, chatId, m.key.participant || chatId, async () => {
+                return bot.sendMessage(chatId, { 
+                    text: "✅ Bot mode diubah ke *Public Mode*\nSemua orang bisa menggunakan bot" 
+                }, { quoted: m });
+            });
             return true;
             
         case 'autoread':
+            if (!isOwner) return true;
             if (args[0] === 'on') {
                 autoRead = true;
-                await bot.sendMessage(chatId, { text: "✅ Auto Read diaktifkan" }, { quoted: m });
+                await sendWithTypingEffect(bot, chatId, m.key.participant || chatId, async () => {
+                    return bot.sendMessage(chatId, { text: "✅ Auto Read diaktifkan" }, { quoted: m });
+                });
             } else if (args[0] === 'off') {
                 autoRead = false;
-                await bot.sendMessage(chatId, { text: "✅ Auto Read dimatikan" }, { quoted: m });
-            } else {
-                await bot.sendMessage(chatId, { text: `Gunakan: ${config.prefix}autoread on/off` }, { quoted: m });
+                await sendWithTypingEffect(bot, chatId, m.key.participant || chatId, async () => {
+                    return bot.sendMessage(chatId, { text: "✅ Auto Read dimatikan" }, { quoted: m });
+                });
+            }
+            return true;
+            
+        case 'effectketik':
+            if (!isOwner) return true;
+            if (args[0] === 'on') {
+                typingEffectEnabled = true;
+                await sendWithTypingEffect(bot, chatId, m.key.participant || chatId, async () => {
+                    return bot.sendMessage(chatId, { text: "✅ Efek mengetik diaktifkan" }, { quoted: m });
+                });
+            } else if (args[0] === 'off') {
+                typingEffectEnabled = false;
+                await sendWithTypingEffect(bot, chatId, m.key.participant || chatId, async () => {
+                    return bot.sendMessage(chatId, { text: "✅ Efek mengetik dimatikan" }, { quoted: m });
+                });
             }
             return true;
             
         case 'stopgame':
-            // Stop all active games
+            if (!isOwner) return true;
             const stoppedCount = gameManager.activeGames.size;
             gameManager.cleanup();
-            await bot.sendMessage(chatId, { 
-                text: `✅ Semua game dihentikan!\nTotal: ${stoppedCount} game aktif` 
-            }, { quoted: m });
+            await sendWithTypingEffect(bot, chatId, m.key.participant || chatId, async () => {
+                return bot.sendMessage(chatId, { 
+                    text: `✅ Semua game dihentikan!\nTotal: ${stoppedCount} game aktif` 
+                }, { quoted: m });
+            });
             return true;
             
         case 'cleanupgames':
-            // Manual cleanup
-            await handleCleanupGames(bot, chatId);
+            if (!isOwner) return true;
+            await handleCleanupGames(bot, m);
             return true;
             
         case 'hidenfeatures':
+            if (!isOwner) return true;
             await showHiddenFeatures(bot, m);
             return true;
     }
@@ -377,14 +972,18 @@ async function handleOwnerCommands(bot, m, command, args) {
 async function messageHandler(bot, m) {
     if (!m.message) return;
     
+    // ===== CEK JIKA PESAN DITERIMA SEBELUM BOT START =====
+    if (m.messageTimestamp && isMessageBeforeBotStart(m.messageTimestamp)) {
+        return; // Langsung return, ABORT PROCESS tanpa log
+    }
+    
     const chatId = m.key.remoteJid;
     const userId = m.key.participant || m.key.remoteJid;
     const isOwner = m.key.fromMe || (config.ownerNumber && config.ownerNumber.includes(userId));
-    const isFromBot = m.key.fromMe;
+    const pushname = m.pushName || "Unknown";
     
     // ===== CEK BOT MODE =====
     if (botMode === "self" && !isOwner) {
-        console.log(`[HANDLER] Self mode active, ignoring non-owner`);
         return;
     }
     
@@ -393,63 +992,75 @@ async function messageHandler(bot, m) {
         try {
             await bot.readMessages([m.key]);
         } catch (error) {
-            console.error('[AUTO READ] Error:', error);
+            console.error('❌ Error auto read:', error);
         }
     }
     
     // Ekstrak teks
     let text = '';
+    let messageType = 'text';
+    
     if (m.message?.conversation) {
         text = m.message.conversation;
     } else if (m.message?.extendedTextMessage?.text) {
         text = m.message.extendedTextMessage.text;
     } else if (m.message?.imageMessage?.caption) {
         text = m.message.imageMessage.caption;
+        messageType = 'image';
     } else if (m.message?.videoMessage?.caption) {
         text = m.message.videoMessage.caption;
+        messageType = 'video';
+    } else if (m.message?.stickerMessage) {
+        messageType = 'sticker';
+    } else if (m.message?.audioMessage) {
+        messageType = 'audio';
+    } else if (m.message?.documentMessage) {
+        messageType = 'document';
     }
     
     text = text ? text.trim() : '';
     
-    console.log(`[HANDLER] Message from ${isFromBot ? 'BOT' : userId}: "${text.substring(0, 30)}${text.length > 30 ? '...' : ''}"`);
+    // Log setiap pesan yang masuk
+    let logText = text;
+    if (logText.length > 50) {
+        logText = logText.substring(0, 50) + '...';
+    }
     
-    // ===== PRIORITAS 1: HANDLE GAME INPUT (tanpa prefix) =====
+    if (messageType === 'text' && text) {
+        logMessage(`💬 "${logText}"`, m);
+    } else if (messageType !== 'text') {
+        logMessage(`📎 ${messageType.toUpperCase()}`, m);
+    }
+    
+    // ===== PRIORITAS 1: HANDLE AFK SYSTEM =====
     const isPrefixed = text.toLowerCase().startsWith(config.prefix);
     
     if (text && !isPrefixed) {
-        console.log(`[HANDLER] Non-prefix message detected, checking game input...`);
-        
-        // Coba handle sebagai input game melalui Game Manager
-        const gameResult = await gameManager.processGameInput(bot, m);
-        
-        if (gameResult.processed) {
-            console.log(`[HANDLER] ✓ Game input processed: ${gameResult.reason}`);
+        const afkProcessed = await afkHandler.checkAFK(bot, m);
+        if (afkProcessed) {
             return;
         }
         
-        console.log(`[HANDLER] ✗ Not a game input (${gameResult.reason}), checking other handlers...`);
+        const gameResult = await gameManager.processGameInput(bot, m);
+        if (gameResult.processed) {
+            return;
+        }
         
         // ===== INTRO REPLY HANDLER =====
         try {
             const introModule = require('./plugin/group/intro.js');
             if (introModule.handleIntroReply) {
-                console.log(`[HANDLER] Trying intro reply handler...`);
                 await introModule.handleIntroReply(bot, m);
             }
-        } catch (error) {
-            // Module not found, skip
-        }
+        } catch (error) {}
         
         // ===== ANTI TOXIC CHECK =====
         try {
             const antitoxicModule = require('./plugin/group/antitoxic.js');
             if (antitoxicModule.checkToxicMessage) {
-                console.log(`[HANDLER] Checking for toxic message...`);
                 await antitoxicModule.checkToxicMessage(bot, m);
             }
-        } catch (error) {
-            // Module not found or error
-        }
+        } catch (error) {}
         
         return;
     }
@@ -459,144 +1070,189 @@ async function messageHandler(bot, m) {
         return;
     }
     
-    console.log(`[HANDLER] Command detected: "${text}"`);
-    
     const args = text.slice(config.prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
+    
+    // ===== HANDLE PREMIUM MENU COMMANDS =====
+    if (command === "prem_menu" || command === "premium_menu") {
+        logMessage(`💎 Premium menu`, m);
+        return sendPremiumMenu(bot, m, false);
+    }
+    
+    if (command === "prem_allmenu" || command === "premium_allmenu") {
+        logMessage(`💎 Premium all menu`, m);
+        return sendPremiumMenu(bot, m, true);
+    }
+    
+    // Handle premium submenu (prem_<category>)
+    if (command.startsWith("prem_") && command !== "prem_menu" && command !== "prem_allmenu") {
+        const category = command.slice(5);
+        logMessage(`💎 Premium submenu: ${category}`, m);
+        return sendPremiumSubMenu(bot, m, category);
+    }
     
     // Handle owner commands terlebih dahulu
     const handled = await handleOwnerCommands(bot, m, command, args);
     if (handled) {
-        console.log(`[HANDLER] ✓ Owner command handled: ${command}`);
         return;
     }
     
     // Menu commands
     if (command === "menu") {
-        console.log(`[HANDLER] Showing main menu`);
+        logMessage(`📋 Menu utama`, m);
         return sendMainMenu(bot, m);
     }
     
     if (command === "allmenu") {
-        console.log(`[HANDLER] Showing all menu`);
+        logMessage(`📚 All menu`, m);
         return sendAllMenu(bot, m, false);
     }
     
     if (command === "hidenfeatures") {
-        console.log(`[HANDLER] Showing hidden features`);
+        if (!isOwner) return;
+        logMessage(`👻 Hidden features`, m);
         await showHiddenFeatures(bot, m);
         return;
     }
     
     if (command.startsWith("menu_")) {
         const cat = command.slice(5);
-        console.log(`[HANDLER] Showing submenu for: ${cat}`);
+        logMessage(`📂 Submenu: ${cat}`, m);
         return sendSubMenu(bot, m, cat);
     }
     
-    // ===== SPECIAL HANDLING FOR INTROLIST =====
-    if (command === "introlist") {
-        console.log(`[HANDLER] Handling introlist command`);
-        try {
-            const introModule = require('./plugin/group/intro.js');
-            if (introModule.introList) {
-                await introModule.introList(bot, m);
-                return;
-            }
-        } catch (error) {
-            console.error(`[HANDLER] Intro module error:`, error);
-        }
-    }
-    
     // Handler plugin commands
-    console.log(`[HANDLER] Looking for plugin command: ${command}`);
     let executed = false;
+    let isOwnerOnlyCommand = false;
+    let isPremiumOnlyCommand = false;
     
+    // Cek di semua plugins (termasuk premium)
     for (const [cat, cmds] of plugins) {
         for (const cmd of cmds) {
             let cmdName = cmd.command;
+            let commandFound = false;
+            
             if (Array.isArray(cmdName)) {
                 const found = cmdName.find(c => c.toLowerCase() === command);
                 if (!found) continue;
                 cmdName = found;
+                commandFound = true;
             } else {
                 if (cmdName.toLowerCase() !== command) continue;
+                commandFound = true;
             }
             
-            console.log(`[HANDLER] Found plugin: ${cmdName} in category: ${cat}`);
+            if (!commandFound) continue;
             
+            // ===== CEK APAKAH COMMAND HANYA UNTUK OWNER =====
             if (cmd.ownerOnly && !isOwner) {
-                console.log(`[HANDLER] Owner only, rejecting`);
-                await bot.sendMessage(chatId, { text: "⚠️ Command ini hanya untuk owner!" }, { quoted: m });
-                return;
+                logMessage(`🚫 Owner-only: ${cmdName}`, m);
+                isOwnerOnlyCommand = true;
+                executed = true;
+                break;
+            }
+            
+            // ===== CEK APAKAH COMMAND PREMIUM ONLY =====
+            if (cmd.premiumOnly) {
+                const premiumStatus = premiumHandler.isPremium(userId, m);
+                if (!premiumStatus.isPremium && !premiumStatus.isOwner && !premiumStatus.isBot) {
+                    logMessage(`🚫 Premium-only: ${cmdName}`, m);
+                    
+                    // Kirim pesan bahwa ini hanya untuk premium
+                    const premiumMsg = `❌ *Fitur Premium Only!*\n\n` +
+                                      `Fitur *${cmdName}* hanya untuk user premium.\n\n` +
+                                      `💎 *Upgrade ke Premium:*\n` +
+                                      `Gunakan: .xbuy status <hari>\n` +
+                                      `1 hari = 5 XCoin\n\n` +
+                                      `💰 *Cek XCoin:* .myxcoin`;
+                    
+                    if (bot._sendWithTyping) {
+                        await bot._sendWithTyping.call(this, premiumMsg, m, { minDelay: 1500, maxDelay: 3000 });
+                    } else {
+                        await bot.sendMessage(m.key.remoteJid, { text: premiumMsg }, { quoted: m });
+                    }
+                    
+                    isPremiumOnlyCommand = true;
+                    executed = true;
+                    break;
+                }
             }
             
             try {
-                console.log(`[HANDLER] Executing plugin: ${cmdName}`);
+                logMessage(`⚡ Executing: ${cmdName}`, m);
+                
                 await cmd.execute(bot, m, args);
                 executed = true;
-                console.log(`[HANDLER] ✓ Plugin executed successfully`);
+                logMessage(`✅ Success: ${cmdName}`, m);
             } catch (e) {
-                console.error(`[HANDLER] ✗ Error executing command ${cmdName}:`, e);
-                await bot.sendMessage(chatId, { 
-                    text: `❌ Terjadi error saat menjalankan command: ${e.message}` 
-                }, { quoted: m });
+                logMessage(`❌ Error: ${cmdName}`, m);
             }
             break;
         }
         if (executed) break;
     }
     
-    if (!executed) {
-        console.log(`[HANDLER] ✗ Command not found: ${command}`);
+    // ===== HANDLE TYPO / COMMAND NOT FOUND =====
+    if (!executed && !isOwnerOnlyCommand && !isPremiumOnlyCommand) {
+        logMessage(`❓ Tidak ditemukan: ${command}`, m);
+        return;
     }
 }
 
-// Initialize Game Manager on bot start
+// ===== INITIALIZE PREMIUM HANDLER =====
 async function initialize(bot) {
     try {
+        // Initialize game manager
         await gameManager.init();
-        console.log('[HANDLER] Game Manager initialized');
+        console.log('🎮 Game Manager siap');
         
         // Jalankan cleanup expired games saat start
-        console.log('[HANDLER] Running initial cleanup...');
         const initialCleanup = await performCleanup();
         if (initialCleanup.success && initialCleanup.gamesCleaned > 0) {
-            console.log(`[HANDLER] Initial cleanup: ${initialCleanup.gamesCleaned} expired games removed`);
+            console.log(`🧹 ${initialCleanup.gamesCleaned} game expired dibersihkan`);
         }
         
-        // Start periodic cleanup
-        startCleanupInterval();
+        // Cleanup expired premium
+        const premiumCleanup = premiumHandler.cleanup();
+        if (premiumCleanup.cleaned > 0) {
+            console.log(`👑 ${premiumCleanup.cleaned} premium expired dibersihkan`);
+        }
+        
+        console.log(`⌨️ Efek mengetik: ${typingEffectEnabled ? 'ON' : 'OFF'}`);
+        console.log(`👑 Premium Handler: READY`);
         
     } catch (error) {
-        console.error('[HANDLER] Error initializing Game Manager:', error);
+        console.error('❌ Error Game Manager:', error);
     }
 }
 
 // Cleanup saat bot shutdown
 async function shutdown() {
-    console.log('[HANDLER] Shutting down...');
+    console.log('🛑 Shutting down...');
     
-    // Stop cleanup interval
     stopCleanupInterval();
     
-    // Bersihkan game data sebelum shutdown
     try {
         await gameManager.cleanup();
-        console.log('[HANDLER] Game data cleaned up');
+        console.log('🧹 Data game dibersihkan');
     } catch (error) {
-        console.error('[HANDLER] Error during shutdown cleanup:', error);
+        console.error('❌ Error saat shutdown:', error);
     }
 }
 
 function notifyOwner(bot) {
+    setBotStartTime();
+    
     if (config.ownerNumber) {
         bot.sendMessage(config.ownerNumber, { 
             text: `🤖 Bot berhasil connect!\n\n` +
-                  `📊 Status Game Manager:\n` +
-                  `• Game aktif: ${gameManager.activeGames.size}\n` +
+                  `📊 Status Bot:\n` +
+                  `• Mode: ${botMode}\n` +
+                  `• Auto Read: ${autoRead ? 'ON' : 'OFF'}\n` +
+                  `• Typing Effect: ${typingEffectEnabled ? 'ON' : 'OFF'}\n` +
+                  `• Active Games: ${gameManager.activeGames.size}\n` +
                   `• Cleanup: ${CLEANUP_INTERVAL_MINUTES} menit\n` +
-                  `• Auto-cleanup: AKTIF`
+                  `👑 Premium System: AKTIF`
         });
     }
 }
@@ -606,8 +1262,12 @@ module.exports = {
     messageHandler,
     notifyOwner,
     initialize,
-    shutdown, // Export shutdown function
+    shutdown,
     getBotMode: () => botMode,
     getAutoRead: () => autoRead,
-    gameManager
+    getTypingEffect: () => typingEffectEnabled,
+    gameManager,
+    premiumHandler,
+    sendWithTypingEffect,
+    sendMessageWithTyping
 };
