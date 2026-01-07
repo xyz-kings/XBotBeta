@@ -2,20 +2,20 @@
   "139904751247575@lid": {
     "userId": "139904751247575@lid",
     "userName": "139904751247575",
-    "points": 9999998,
+    "points": 10000001,
     "rank": "💎 Immortal",
     "level": 8,
-    "totalGames": 10000008,
-    "gamesWon": 10000003,
-    "gamesLost": 5,
+    "totalGames": 10000017,
+    "gamesWon": 10000009,
+    "gamesLost": 8,
     "winRate": 100,
-    "winStreak": 0,
+    "winStreak": 3,
     "maxWinStreak": 10000,
     "dailyStreak": 0,
-    "lastPlayed": "2025-12-27T04:30:26.146Z",
+    "lastPlayed": "2026-01-01T05:30:35.306Z",
     "gameStats": {
-      "played": 10000008,
-      "won": 10000003
+      "played": 10000017,
+      "won": 10000009
     },
     "wrongCount": 0,
     "isBanned": true,
