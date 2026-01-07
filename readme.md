@@ -153,7 +153,11 @@ setelah itu
 ```bash
 yarn add sharp --ignore-platform
 ```
-
+dan sesudah itu langsung ulang instal 
+```bash
+yarn install
+```
+setelah succes maka lanjut tahap berikutnya 
 ---
 
 ## Menjalankan Bot
