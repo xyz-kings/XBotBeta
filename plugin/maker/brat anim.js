@@ -34,7 +34,7 @@ module.exports = {
 // --- PANGGIL REACT LOADING DARI HELPER ---
       await reactLoading(bot, m); // otomatis pakai default 🔁🔃🔄
       // === FETCH BRAT ANIM ===
-      const api = `https://brat-anim.vercel.app/api/bratanim?text=${encodeURIComponent(text)}`;
+      const api = `https://xbrat-whatsapp.vercel.app/bratanim?text=${encodeURIComponent(text)}`;
       const res = await axios.get(api, { responseType: "arraybuffer" });
 
       const inFile = path.join(TMP, `${Date.now()}.mp4`);
