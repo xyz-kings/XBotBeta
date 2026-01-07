@@ -1,0 +1,16 @@
+{
+  "139904751247575@lid": {
+    "userId": "139904751247575@lid",
+    "userName": "Xyz",
+    "isPremium": true,
+    "purchaseDate": "2025-12-30T18:21:02.856Z",
+    "expiryDate": "2026-07-24T17:33:15.395Z",
+    "daysPurchased": 6,
+    "xcoinUsed": 0,
+    "originalXcoin": "∞",
+    "remainingXcoin": "∞",
+    "isRenewal": true,
+    "previousExpiry": "2026-07-18T17:33:15.395Z",
+    "purchasedByOwner": true
+  }
+}
