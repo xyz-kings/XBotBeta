@@ -158,6 +158,8 @@ dan sesudah itu langsung ulang instal
 yarn install
 ```
 setelah succes maka lanjut tahap berikutnya 
+
+
 ---
 
 ## Menjalankan Bot
