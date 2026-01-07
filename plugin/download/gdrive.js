@@ -28,7 +28,7 @@ function getMimeType(filename) {
 }
 
 module.exports = {
-    command: ["grive", "gdrive"],
+    command: ["gdrive"],
 
     async execute(bot, m, args) {
         if (args.length === 0) {
