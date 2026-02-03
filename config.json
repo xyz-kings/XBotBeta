@@ -1,7 +1,8 @@
 {
-  "ownerNumber": "6287718203240@s.whatsapp.net",
-  "ownerName": "XYZ Kings",
-  "author" : "Xyz Kings",
+  "ownerNumber": "628771823240@s.whatsapp.net",
+  "ownerName": "xʏᴢ ᴋɪɴɢs",
+  "author": "𝖃𝖞𝖟 𝕶𝖎𝖓𝖌𝖘",
+  "version": "1.2.0",
   "github": "https://github.com/xyz-kings",
   "tiktok": "https://tiktok.com/@xyz_kings",
   "prefix": ".",
@@ -43,11 +44,62 @@
     "tolol",
     "sarap"
   ],
-  "packName": "Sticker By",
-  "authorSticker": "©Xyz kings",
-  "apiKey": "xyz-key_e5fk326aRs",
+  "packName": "𝙎𝙩𝙞𝙘𝙠𝙚𝙧 𝘽𝙮",
+  "authorSticker": "©𝘹𝘺𝘻𝘬𝘪𝘯𝘨𝘴",
+  "apiKey": "xyz-key_ae8gjLDLah",
   "baseURL": "https://xrest-api.vercel.app",
-  "menuCaption": "Selamat datang di Xyz Bots",
-  "allmenuCaption": "Berikut semua fitur yang tersedia di XYZ Bot",
-  "copyright": "> _© 2025 Xyz Kings - All Rights Reserved_"
+  "newsBaseURL": "https://xyz-apicostum.vercel.app",
+  "FunBaseURL": "https://random-iseng.vercel.app",
+  "Funv2BaseURL": "https://xrandon-v2.vercel.app",
+  "Funv3BaseURL": "https://xrandom-v3.vercel.app",
+  "menuCaption": "",
+  "allmenuCaption": "",
+  "copyright": "> _©2026 𝘟𝘺𝘻 𝘒𝘪𝘯𝘨𝘴 - 𝘈𝘭𝘭 𝘙𝘪𝘨𝘩𝘵𝘴 𝘙𝘦𝘴𝘦𝘳𝘷𝘦𝘫_",
+  
+  "thumbnail": "https://image2url.com/r2/default/images/1769778472772-76624891-7a42-4586-8300-4293e453d304.jpg",
+  "botName": "𝕏𝕐ℤ 𝕂𝕀ℕ𝔾𝕊 𝔹𝕆𝕋",
+  
+  "menuConfig": {
+    "mainMenu": {
+      "title": "𝖃𝖞𝖟 𝕶𝖎𝖓𝖌'𝖘 𝕭𝖔𝖙𝖘 𝖂𝖍𝖆𝖙𝖘𝕬𝖕𝖕",
+      "subtitle": "Premium WhatsApp Bot • Main Menu",
+      "thumbnail": "https://image2url.com/r2/default/images/1769778472772-76624891-7a42-4586-8300-4293e453d304.jpg",
+      "body": "Main Menu • Fast Response"
+    },
+    "allMenu": {
+      "title": "𝖃𝖞𝖟 𝕶𝖎𝖓𝖌'𝖘 𝕭𝖔𝖖𝖙𝖘 𝖂𝖍𝖆𝖙𝖘𝕬𝖕𝖕",
+      "subtitle": "Complete Command List • All Features",
+      "thumbnail": "https://image2url.com/r2/default/images/1769791440853-56ae3073-6ac1-448f-ac8c-ca1c4a395e4c.jpg",
+      "body": "All Commands • Complete Features"
+    },
+    "subMenu": {
+      "title": "𝖃𝖞𝖟 𝕶𝖎𝖓𝖌'𝖘 𝕭𝖔𝖙𝖘 𝖂𝖍𝖆𝖙𝖘𝕬𝖕𝖕",
+      "subtitle": "Category Menu • Fast Response",
+      "thumbnail": "https://x-img.vercel.app/proxy/fuwwjfc0.png",
+      "body": "Category Menu • Fast Response"
+    },
+    "premiumMenu": {
+      "title": "𝖃𝖞𝖟 𝕶𝖎𝖓𝖌'𝖘 𝕭𝖔𝖙𝖘 𝖂𝖍𝖆𝖙𝖘𝕬𝖕𝖕",
+      "subtitle": "Exclusive Features • Premium Access",
+      "thumbnail": "https://image2url.com/r2/default/images/1769778472772-76624891-7a42-4586-8300-4293e453d304.jpg",
+      "body": "Premium Features • Exclusive Access"
+    },
+    "hiddenMenu": {
+      "title": "𝖃𝖞𝖟 𝕶𝖎𝖓𝖌'𝖘 𝕭𝖔𝖖𝖙𝖘 𝖂𝖍𝖆𝖙𝖘𝕬𝖕𝖕",
+      "subtitle": "Special Access • Owner Only",
+      "thumbnail": "https://image2url.com/r2/default/images/1769778472772-76624891-7a42-4586-8300-4293e453d304.jpg",
+      "body": "Owner Menu • Special Access"
+    }
+  },
+  
+  "continueChatConfig": {
+    "forwardingScore": 20,
+    "showAdAttribution": false,
+    "renderLargerThumbnail": true,
+    "containsAutoReply": true,
+    "defaultBody": "WhatsApp Bot • Fast Response",
+    "defaultMediaType": 1,
+    "thumbnailWidth": 300,
+    "thumbnailHeight": 300
+  }
 }
